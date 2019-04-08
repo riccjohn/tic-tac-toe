@@ -1,0 +1,32 @@
+{
+  "name": "tic-tac-toe",
+  "version": "0.0.1",
+  "description": "Apprenticeship project - tic-tac-toe written in TypeScript",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/riccjohn/tic-tac-toe.git"
+  },
+  "author": "John Riccardi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/riccjohn/tic-tac-toe/issues"
+  },
+  "homepage": "https://github.com/riccjohn/tic-tac-toe#readme",
+  "devDependencies": {
+    "commitizen": "^3.0.7",
+    "cz-conventional-changelog": "^2.1.0",
+    "eslint": "^5.16.0",
+    "eslint-plugin-react": "^7.12.4",
+    "typescript": "^3.4.2"
+  },
+  "dependencies": {},
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}
