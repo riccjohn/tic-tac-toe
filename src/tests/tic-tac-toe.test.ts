@@ -12,13 +12,14 @@ describe("Tic-tac-toe", () => {
     expect(game.board).toEqual(board);
   });
 
-  it("places an X on the board on X's t urn", () => {
+  it("will mark the board when a user chooses a space", () => {
     game.place(0, 0);
     expect(game.board[0][0]).toEqual("X");
   });
 
   it("switches players every turn", () => {
     game.place(0, 0);
+    expect(game.board[0][0]).toEqual("X");
     game.place(0, 1);
     expect(game.board[0][1]).toEqual("O");
   });
@@ -29,7 +30,7 @@ describe("Tic-tac-toe", () => {
     expect(game.board[0][0]).toBe("X");
   });
 
-  it("will end the game when there are 3 X's in a row", () => {
+  it("will detect a win when there are 3 X's in a row", () => {
     game.place(0, 0); // X
     game.place(2, 0); // O
     game.place(0, 1); // X
@@ -38,12 +39,21 @@ describe("Tic-tac-toe", () => {
     expect(game.winner).toEqual("X");
   });
 
-  it("will end the game when there are 3 X's in a column", () => {
+  it("will detect a win when there are 3 X's in a column", () => {
+    game.place(0, 0); // X
+    game.place(0, 2); // O
+    game.place(1, 0); // X
+    game.place(0, 1); // O
+    game.place(2, 0); // X
+    expect(game.winner).toEqual("X");
+  });
+
+  xit("will detect a win when there are 3 X's diagonally", () => {
     game.place(0, 0);
     game.place(0, 2);
+    game.place(1, 1);
     game.place(1, 0);
-    game.place(0, 1);
-    game.place(2, 0);
-    expect(game.winner).toEqual("X");
+    game.place(2, 2);
+    expect(game.winner).toEqual("Y");
   });
 });
