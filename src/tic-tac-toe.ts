@@ -63,26 +63,27 @@ class Game {
     }
   }
 
-  checkDiagonalsForWin(x: number): void {
-    for (let y = 0; y < this.board.length - 2; y++) {
-      if (this.board[x][y] === this.currentPlayer) {
-        // Check for a left => right win
-        console.log(`Checking ${x} ${y} => ${this.board[x][y]}`);
-        if (
-          this.board[x + 1][y + 1] === this.currentPlayer &&
-          this.board[x + 2][y + 2] === this.currentPlayer
-        )
-          this.winner = this.currentPlayer;
-      }
+  checkDiagonalsForWin(): void {
+    const diagonalValues = [];
+    const diagonalValuesRightLeft = [];
+    for (let i = 0; i < this.boardSize; i++) {
+      diagonalValues.push(this.board[i][i]);
+      diagonalValuesRightLeft.push(this.board[i][this.boardSize - 1 - i]);
+    }
+    const winCondition =
+      diagonalValues.every(square => square === this.currentPlayer) ||
+      diagonalValuesRightLeft.every(square => square === this.currentPlayer);
+    if (winCondition) {
+      this.winner = this.currentPlayer;
     }
   }
 
   checkGameForWin(): void {
-    for (let i = 0; i < this.board.length; i++) {
+    for (let i = 0; i < this.boardSize; i++) {
       this.checkRowForWin(i);
       this.checkColumnForWin(i);
-      // this.checkDiagonalsForWin(i);
     }
+    this.checkDiagonalsForWin();
   }
 }
 

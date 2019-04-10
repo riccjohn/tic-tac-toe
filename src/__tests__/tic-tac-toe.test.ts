@@ -64,16 +64,16 @@ describe("Tic-tac-toe", () => {
     expect(game.winner).toEqual("X");
   });
 
-  xit("will detect a win when there are 3 X's diagonally left to right", () => {
+  it("will detect a win when there are 3 X's diagonally left to right", () => {
     game.place(0, 0); // X
     game.place(0, 2); // O
     game.place(1, 1); // X
-    game.place(1, 0); // Y
+    game.place(1, 0); // O
     game.place(2, 2); // X
     expect(game.winner).toEqual("X");
   });
 
-  xit("will detect a win when there are 3 X's diagonally right to left", () => {
+  it("will detect a win when there are 3 X's diagonally right to left", () => {
     game.place(0, 2);
     game.place(0, 0);
     game.place(1, 1);
