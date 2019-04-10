@@ -17,17 +17,17 @@ class Game {
     this.board = this.generateBoard();
   }
 
-  generateBoard(): Board {
+  private generateBoard(): Board {
     return this.eachIndex().map(() => this.eachIndex().map(() => undefined));
   }
 
-  switchPlayers(): void {
+  private switchPlayers(): void {
     if (this.currentPlayer === PlayerPiece.X)
       this.currentPlayer = PlayerPiece.O;
     else this.currentPlayer = PlayerPiece.X;
   }
 
-  place(x: number, y: number): void {
+  public place(x: number, y: number): void {
     if (!this.board[x][y]) {
       this.board[x][y] = this.currentPlayer;
       this.checkGameForWin();
@@ -47,11 +47,11 @@ class Game {
     return square === this.currentPlayer;
   };
 
-  checkRowsForWin(): boolean {
+  private checkRowsForWin(): boolean {
     return this.board.some(row => row.every(this.isCurrentPlayer));
   }
 
-  checkColumnsForWin(): boolean {
+  private checkColumnsForWin(): boolean {
     const transposedBoard = this.eachIndex().map(i =>
       this.board.map(row => row[i])
     );
@@ -59,7 +59,7 @@ class Game {
     return transposedBoard.some(row => row.every(this.isCurrentPlayer));
   }
 
-  checkDiagonalsForWin(): boolean {
+  private checkDiagonalsForWin(): boolean {
     const diagonals = [
       this.eachIndex().map(i => this.board[i][i]),
       this.eachIndex().map(i => this.board[i][this.boardSize - 1 - i])
@@ -68,7 +68,7 @@ class Game {
     return diagonals.some(values => values.every(this.isCurrentPlayer));
   }
 
-  checkGameForWin(): void {
+  private checkGameForWin(): void {
     const winCondition =
       this.checkRowsForWin() ||
       this.checkColumnsForWin() ||
