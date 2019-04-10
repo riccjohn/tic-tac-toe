@@ -43,47 +43,40 @@ class Game {
     }
   }
 
-  checkRowForWin(rowNumber: number): void {
+  checkRowForWin(rowNumber: number): boolean {
     const squaresInRow = this.board[rowNumber];
-    const winCondition = squaresInRow.every(
-      square => square === this.currentPlayer
-    );
-    if (winCondition) {
-      this.winner = this.currentPlayer;
-    }
+    return squaresInRow.every(square => square === this.currentPlayer);
   }
 
-  checkColumnForWin(colNumber: number): void {
+  checkColumnForWin(colNumber: number): boolean {
     const squaresInColumn = this.board.map(row => row[colNumber]);
-    const winCondition = squaresInColumn.every(
-      square => square === this.currentPlayer
-    );
-    if (winCondition) {
-      this.winner = this.currentPlayer;
-    }
+    return squaresInColumn.every(square => square === this.currentPlayer);
   }
 
-  checkDiagonalsForWin(): void {
+  checkDiagonalsForWin(): boolean {
     const diagonalValues = [];
     const diagonalValuesRightLeft = [];
     for (let i = 0; i < this.boardSize; i++) {
       diagonalValues.push(this.board[i][i]);
       diagonalValuesRightLeft.push(this.board[i][this.boardSize - 1 - i]);
     }
-    const winCondition =
+    return (
       diagonalValues.every(square => square === this.currentPlayer) ||
-      diagonalValuesRightLeft.every(square => square === this.currentPlayer);
-    if (winCondition) {
-      this.winner = this.currentPlayer;
-    }
+      diagonalValuesRightLeft.every(square => square === this.currentPlayer)
+    );
   }
 
   checkGameForWin(): void {
+    let winCondition = false;
     for (let i = 0; i < this.boardSize; i++) {
-      this.checkRowForWin(i);
-      this.checkColumnForWin(i);
+      winCondition = winCondition || this.checkRowForWin(i);
+      winCondition = winCondition || this.checkColumnForWin(i);
     }
-    this.checkDiagonalsForWin();
+    winCondition = winCondition || this.checkDiagonalsForWin();
+
+    if (winCondition) {
+      this.winner = this.currentPlayer;
+    }
   }
 }
 
