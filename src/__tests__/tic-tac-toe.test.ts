@@ -7,9 +7,25 @@ describe("Tic-tac-toe", () => {
     game = new Game();
   });
 
-  it("starts with an empty board", () => {
-    const board = [["", "", ""], ["", "", ""], ["", "", ""]];
+  it("will generate an empty board that is 3x3 by default", () => {
+    const board = [
+      [undefined, undefined, undefined],
+      [undefined, undefined, undefined],
+      [undefined, undefined, undefined]
+    ];
     expect(game.board).toEqual(board);
+  });
+
+  it("will generate a 5x5 board given the correct arguments", () => {
+    const board = [
+      [undefined, undefined, undefined, undefined, undefined],
+      [undefined, undefined, undefined, undefined, undefined],
+      [undefined, undefined, undefined, undefined, undefined],
+      [undefined, undefined, undefined, undefined, undefined],
+      [undefined, undefined, undefined, undefined, undefined]
+    ];
+    const newGame = new Game(5);
+    expect(newGame.board).toEqual(board);
   });
 
   it("will mark the board when a user chooses a space", () => {
@@ -48,12 +64,21 @@ describe("Tic-tac-toe", () => {
     expect(game.winner).toEqual("X");
   });
 
-  xit("will detect a win when there are 3 X's diagonally", () => {
-    game.place(0, 0);
+  xit("will detect a win when there are 3 X's diagonally left to right", () => {
+    game.place(0, 0); // X
+    game.place(0, 2); // O
+    game.place(1, 1); // X
+    game.place(1, 0); // Y
+    game.place(2, 2); // X
+    expect(game.winner).toEqual("X");
+  });
+
+  xit("will detect a win when there are 3 X's diagonally right to left", () => {
     game.place(0, 2);
+    game.place(0, 0);
     game.place(1, 1);
-    game.place(1, 0);
-    game.place(2, 2);
-    expect(game.winner).toEqual("Y");
+    game.place(0, 1);
+    game.place(2, 0);
+    expect(game.winner).toEqual("X");
   });
 });

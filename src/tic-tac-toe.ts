@@ -1,55 +1,87 @@
-type Square = string;
+enum PlayerPiece {
+  X = "X",
+  O = "O"
+}
+
+type Square = PlayerPiece | undefined;
 type Row = Square[];
 type Board = Row[];
 
 class Game {
   public board: Board;
-  private currentPlayer: string;
-  public winner: string;
+  private currentPlayer: PlayerPiece;
+  public winner: PlayerPiece | undefined;
 
-  constructor() {
-    this.currentPlayer = "X";
-    this.board = [["", "", ""], ["", "", ""], ["", "", ""]];
-    this.winner = "";
+  constructor(private boardSize: number = 3) {
+    this.currentPlayer = PlayerPiece.X;
+    this.board = this.generateBoard();
   }
 
-  switchPlayers() {
-    if (this.currentPlayer === "X") this.currentPlayer = "O";
-    else this.currentPlayer = "X";
+  generateBoard(): Board {
+    let board = [];
+    for (let i = 0; i < this.boardSize; i++) {
+      let row = [];
+      for (let j = 0; j < this.boardSize; j++) {
+        row.push(undefined);
+      }
+      board.push(row);
+    }
+    return board;
   }
 
-  place(x: number, y: number) {
-    if (this.board[x][y] === "") {
+  switchPlayers(): void {
+    if (this.currentPlayer === PlayerPiece.X)
+      this.currentPlayer = PlayerPiece.O;
+    else this.currentPlayer = PlayerPiece.X;
+  }
+
+  place(x: number, y: number): void {
+    if (!this.board[x][y]) {
       this.board[x][y] = this.currentPlayer;
-      this.checkGameStatus();
+      this.checkGameForWin();
       this.switchPlayers();
     }
   }
 
-  checkRow(rowNumber: number) {
-    if (this.board[rowNumber][0] === this.currentPlayer) {
-      if (
-        this.board[rowNumber][1] === this.currentPlayer &&
-        this.board[rowNumber][2] === this.currentPlayer
-      )
-        this.winner = this.currentPlayer;
+  checkRowForWin(rowNumber: number): void {
+    const squaresInRow = this.board[rowNumber];
+    const winCondition = squaresInRow.every(
+      square => square === this.currentPlayer
+    );
+    if (winCondition) {
+      this.winner = this.currentPlayer;
     }
   }
 
-  checkColumn(colNumber: number) {
-    if (this.board[0][colNumber] === this.currentPlayer) {
-      if (
-        this.board[1][colNumber] === this.currentPlayer &&
-        this.board[2][colNumber] === this.currentPlayer
-      )
-        this.winner = this.currentPlayer;
+  checkColumnForWin(colNumber: number): void {
+    const squaresInColumn = this.board.map(row => row[colNumber]);
+    const winCondition = squaresInColumn.every(
+      square => square === this.currentPlayer
+    );
+    if (winCondition) {
+      this.winner = this.currentPlayer;
     }
   }
 
-  checkGameStatus() {
+  checkDiagonalsForWin(x: number): void {
+    for (let y = 0; y < this.board.length - 2; y++) {
+      if (this.board[x][y] === this.currentPlayer) {
+        // Check for a left => right win
+        console.log(`Checking ${x} ${y} => ${this.board[x][y]}`);
+        if (
+          this.board[x + 1][y + 1] === this.currentPlayer &&
+          this.board[x + 2][y + 2] === this.currentPlayer
+        )
+          this.winner = this.currentPlayer;
+      }
+    }
+  }
+
+  checkGameForWin(): void {
     for (let i = 0; i < this.board.length; i++) {
-      this.checkRow(i);
-      this.checkColumn(i);
+      this.checkRowForWin(i);
+      this.checkColumnForWin(i);
+      // this.checkDiagonalsForWin(i);
     }
   }
 }
