@@ -5,10 +5,7 @@
   "singleQuote": true,
   "overrides": [
     {
-      "files": ["*.test.js", ".eslintrc.json", "jest.config.js"],
-      "options": {
-        "semi": true
-      }
+      "files": [".eslintrc.json", "jest.config.js"]
     }
   ]
 }
