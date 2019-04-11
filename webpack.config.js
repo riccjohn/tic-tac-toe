@@ -7,13 +7,12 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(t|j)sx?$/,
-        use: { loader: "awesome-typescript-loader" }
+        test: /\.tsx?$/,
+        use: { loader: "ts-loader" }
       },
       { enforce: "pre", test: /\.js$/, loader: "source-map-loader" }
     ]
   },
-  // resolve: { extensions: ["*", ".js", ".jsx"] },
   resolve: { extensions: [".ts", ".tsx", ".js", ".jsx"] },
   output: {
     path: path.resolve(__dirname, "dist/"),
@@ -21,10 +20,13 @@ module.exports = {
     filename: "bundle.js"
   },
   devServer: {
+    watchOptions: {
+      ignored: ["node_modules"]
+    },
     contentBase: path.join(__dirname, "public/"),
     port: 3000,
-    publicPath: "http://localhost:3000/dist/",
-    hotOnly: true
+    publicPath: "http://localhost:3000/dist/"
+    // hotOnly: true
   },
   plugins: [new webpack.HotModuleReplacementPlugin()],
   devtool: "source-map"
