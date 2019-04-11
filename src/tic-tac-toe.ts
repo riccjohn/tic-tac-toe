@@ -75,7 +75,7 @@ class Game {
       this.checkDiagonalsForWin()
     ];
 
-    if (winCondition.some(winnerCheck => winnerCheck === true)) {
+    if (winCondition.some(winnerCheck => winnerCheck)) {
       this.winner = this.currentPlayer;
     }
   }
