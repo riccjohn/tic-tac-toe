@@ -81,4 +81,9 @@ describe("Tic-tac-toe", () => {
     game.place(2, 0);
     expect(game.winner).toEqual("X");
   });
+
+  it("will not detect a winner until a win condition is met", () => {
+    game.place(0, 0);
+    expect(game.winner).toEqual(undefined);
+  });
 });
