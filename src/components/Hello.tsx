@@ -1,5 +1,4 @@
 import * as React from "react";
-// import { hot } from "react-hot-loader";
 
 class Hello extends React.Component<{}, {}> {
   render() {
@@ -11,5 +10,4 @@ class Hello extends React.Component<{}, {}> {
   }
 }
 
-// export default hot(Hello);
 export default Hello;
