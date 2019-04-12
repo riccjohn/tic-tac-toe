@@ -30,6 +30,10 @@ h1 {
   text-align: center;
 }
 
+button {
+  margin: 2rem;
+}
+
 table {
   border-collapse: collapse;
   align-self: center;

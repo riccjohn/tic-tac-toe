@@ -13,6 +13,7 @@
       "check-format",
       "allow-leading-underscore"
     ],
+    "member-ordering": false,
     "no-shadowed-variable": [
       true,
       {
