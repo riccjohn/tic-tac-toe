@@ -6,7 +6,26 @@
     "quotemark": [true, "single", "avoid-escape"],
     "semicolon": [true, "always"],
     "arrow-parens": [true, "ban-single-arg-parens"],
-    "ordered-imports": false
+    "ordered-imports": false,
+    "variable-name": [
+      true,
+      "ban-keywords",
+      "check-format",
+      "allow-leading-underscore"
+    ],
+    "no-shadowed-variable": [
+      true,
+      {
+        "class": true,
+        "enum": true,
+        "function": true,
+        "interface": true,
+        "namespace": true,
+        "typeAlias": false,
+        "typeParameter": false,
+        "underscore": false
+      }
+    ]
   },
   "rulesDirectory": []
 }
