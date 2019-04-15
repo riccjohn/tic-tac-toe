@@ -4,7 +4,7 @@
   "jsRules": {},
   "rules": {
     "quotemark": [true, "single", "avoid-escape"],
-    "semicolon": [true, "always"],
+    "semicolon": [true, "always", "ignore-bound-class-methods"],
     "arrow-parens": [true, "ban-single-arg-parens"],
     "ordered-imports": false,
     "variable-name": [
@@ -26,7 +26,8 @@
         "typeParameter": false,
         "underscore": false
       }
-    ]
+    ],
+    "no-console": { "options": [true, "log"], "severity": "warning" }
   },
   "rulesDirectory": []
 }
