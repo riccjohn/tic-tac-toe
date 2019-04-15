@@ -11,17 +11,25 @@ class GameBoard extends React.Component<any, any> {
         [undefined, undefined, undefined],
         [undefined, undefined, undefined],
       ],
+      boardSize: 0,
       gameStatus: null,
     };
   }
 
   public handleChange = (event: React.FormEvent<HTMLInputElement>): void => {
-    console.log('Handling Change!!!', event.currentTarget.value);
+    this.setState({
+      boardSize: event.currentTarget.value,
+    });
   };
 
   public submitBoardSize = (event: any): void => {
     event.preventDefault();
-    console.log('SUBMITTING');
+    const newGame = new Game(Number(this.state.boardSize));
+    console.log('NEW GAME', newGame);
+    this.setState({
+      board: newGame.board,
+      gameStatus: 'In progress',
+    });
   };
 
   public render() {
