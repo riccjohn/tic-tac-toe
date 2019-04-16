@@ -1,3 +1,5 @@
+import { PlayerPiece } from './PlayerPiece';
+
 class Game {
   public board: Board;
   public winner: PlayerPiece | undefined;

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import Game from '../tic-tac-toe';
+import { PlayerPiece } from '../PlayerPiece';
 
 class GameBoard extends React.Component<any, any> {
   constructor(props: {}) {
@@ -45,10 +46,10 @@ class GameBoard extends React.Component<any, any> {
           {this.state.gameStatus ? (
             <table>
               <tbody>
-                {board.map((row: Row, _idx: number) => (
-                  <tr key={_idx}>
-                    {row.map((square: Square, _idx: number) => (
-                      <td key={_idx}>{square || '•'}</td>
+                {board.map((row: Row) => (
+                  <tr>
+                    {row.map((square: Square) => (
+                      <td>{square || '•'}</td>
                     ))}
                   </tr>
                 ))}
