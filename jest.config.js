@@ -14,5 +14,5 @@ module.exports = {
   transform: {
     "^.+\.(ts|tsx)$": "ts-jest",
   },
-  setupFiles: ["<rootDir>/src/setupEnzyme.ts"],
+  setupFiles: ["<rootDir>/src/__tests__/setupEnzyme.ts"],
 };
