@@ -1,65 +1,41 @@
 import * as React from 'react';
-import Game from '../tic-tac-toe';
-import { PlayerPiece } from '../PlayerPiece';
+// import { PlayerPiece } from '../PlayerPiece';
 
-class GameBoard extends React.Component<any, any> {
-  constructor(props: {}) {
-    super(props);
-    this.state = {
-      board: [
-        [undefined, undefined, undefined],
-        [undefined, undefined, undefined],
-        [undefined, undefined, undefined],
-      ],
-      boardSize: 0,
-      gameStatus: null,
-    };
-  }
+interface IBoardProps {
+  board: Board;
+}
 
-  public handleChange = (event: React.FormEvent<HTMLInputElement>): void => {
-    this.setState({
-      boardSize: event.currentTarget.value,
-    });
-  };
-
-  public submitBoardSize = (event: any): void => {
-    event.preventDefault();
-    const newGame = new Game(Number(this.state.boardSize));
-    this.setState({
-      board: newGame.board,
-      gameStatus: 'In progress',
-    });
+class GameBoard extends React.Component<IBoardProps> {
+  static defaultProps = {
+    board: [
+      ['X', undefined, undefined],
+      [undefined, 'X', undefined],
+      [undefined, undefined, 'O'],
+    ],
   };
 
   public render() {
-    const { board } = this.state;
+    const { board } = this.props;
     return (
-      <div className='container center'>
-        <div className='center-container center column'>
-          <h1>Tic Tac Toe</h1>
-          <p>What size should the board be?</p>
-          <form onSubmit={this.submitBoardSize}>
-            Board Size:
-            <input onChange={this.handleChange} type='text' name='size' />
-            <input type='submit' value='submit' />
-          </form>
-          {this.state.gameStatus ? (
-            <table>
+      <React.Fragment>
+        {board ? (
+          <div id='board'>
+            <table id='game-table'>
               <tbody>
                 {board.map((row: Row) => (
-                  <tr>
+                  <tr className='row'>
                     {row.map((square: Square) => (
-                      <td>{square || '•'}</td>
+                      <td className='square'>{square || '•'}</td>
                     ))}
                   </tr>
                 ))}
               </tbody>
             </table>
-          ) : (
-            <p> Start a new game</p>
-          )}
-        </div>
-      </div>
+          </div>
+        ) : (
+          <h1>NO_BOARD</h1>
+        )}
+      </React.Fragment>
     );
   }
 }
