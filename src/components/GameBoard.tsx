@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { Square, Row } from '../constants';
 import Game from '../tic-tac-toe';
 
 class GameBoard extends React.Component<any, any> {
@@ -25,7 +24,6 @@ class GameBoard extends React.Component<any, any> {
   public submitBoardSize = (event: any): void => {
     event.preventDefault();
     const newGame = new Game(Number(this.state.boardSize));
-    console.log('NEW GAME', newGame);
     this.setState({
       board: newGame.board,
       gameStatus: 'In progress',
@@ -40,7 +38,7 @@ class GameBoard extends React.Component<any, any> {
           <h1>Tic Tac Toe</h1>
           <p>What size should the board be?</p>
           <form onSubmit={this.submitBoardSize}>
-            Board Size:{' '}
+            Board Size:
             <input onChange={this.handleChange} type='text' name='size' />
             <input type='submit' value='submit' />
           </form>

@@ -1,12 +1,3 @@
-enum PlayerPiece {
-  X = 'X',
-  O = 'O',
-}
-
-type Square = PlayerPiece | undefined;
-type Row = Square[];
-type Board = Row[];
-
 class Game {
   public board: Board;
   public winner: PlayerPiece | undefined;
@@ -47,7 +38,7 @@ class Game {
 
   private isCurrentPlayer = (square: Square): boolean => {
     return square === this.currentPlayer;
-  }
+  };
 
   private checkRowsForWin(): boolean {
     return this.board.some(row => row.every(this.isCurrentPlayer));
