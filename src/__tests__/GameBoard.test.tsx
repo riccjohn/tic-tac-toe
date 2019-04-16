@@ -16,13 +16,9 @@ describe('GameBoard component', () => {
   });
 
   it('should render 25 squares given a 5x5 array', () => {
-    const testBoard = [
-      [undefined, undefined, undefined, undefined, undefined],
-      [undefined, undefined, undefined, undefined, undefined],
-      [undefined, undefined, undefined, undefined, undefined],
-      [undefined, undefined, undefined, undefined, undefined],
-      [undefined, undefined, undefined, undefined, undefined],
-    ];
+    const testBoard = Array(5)
+      .fill(undefined)
+      .map(() => Array(5).fill(undefined));
 
     const wrapper = shallow(<GameBoard board={testBoard} />);
     const squares = wrapper.find('.square');

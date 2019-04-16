@@ -8,22 +8,18 @@ describe('Tic-tac-toe', () => {
   });
 
   it('will generate an empty board that is 3x3 by default', () => {
-    const board = [
-      [undefined, undefined, undefined],
-      [undefined, undefined, undefined],
-      [undefined, undefined, undefined],
-    ];
+    const board = Array(3)
+      .fill(undefined)
+      .map(() => Array(3).fill(undefined));
+
     expect(game.board).toEqual(board);
   });
 
   it('will generate a 5x5 board given the correct arguments', () => {
-    const board = [
-      [undefined, undefined, undefined, undefined, undefined],
-      [undefined, undefined, undefined, undefined, undefined],
-      [undefined, undefined, undefined, undefined, undefined],
-      [undefined, undefined, undefined, undefined, undefined],
-      [undefined, undefined, undefined, undefined, undefined],
-    ];
+    const board = Array(5)
+      .fill(undefined)
+      .map(() => Array(5).fill(undefined));
+
     const newGame = new Game(5);
     expect(newGame.board).toEqual(board);
   });
