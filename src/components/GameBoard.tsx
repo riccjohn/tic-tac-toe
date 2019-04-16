@@ -7,11 +7,9 @@ interface IBoardProps {
 
 class GameBoard extends React.Component<IBoardProps> {
   static defaultProps = {
-    board: [
-      ['X', undefined, undefined],
-      [undefined, 'X', undefined],
-      [undefined, undefined, 'O'],
-    ],
+    board: Array(3)
+      .fill(undefined)
+      .map(() => Array(3).fill(undefined)),
   };
 
   public render() {
