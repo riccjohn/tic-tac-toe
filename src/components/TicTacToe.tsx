@@ -1,18 +1,13 @@
 import * as React from 'react';
 import Game from '../tic-tac-toe';
-import { PlayerPiece } from '../PlayerPiece';
+import GameBoard from './GameBoard';
 
 class TicTacToe extends React.Component<any, any> {
   constructor(props: {}) {
     super(props);
     this.state = {
-      board: [
-        [undefined, undefined, undefined],
-        [undefined, undefined, undefined],
-        [undefined, undefined, undefined],
-      ],
-      boardSize: 3,
-      gameStatus: null,
+      board: null,
+      boardSize: null,
     };
   }
 
@@ -27,7 +22,6 @@ class TicTacToe extends React.Component<any, any> {
     const newGame = new Game(Number(this.state.boardSize));
     this.setState({
       board: newGame.board,
-      gameStatus: 'In progress',
     });
   };
 
@@ -43,18 +37,8 @@ class TicTacToe extends React.Component<any, any> {
             <input onChange={this.handleChange} type='text' name='size' />
             <input type='submit' value='submit' />
           </form>
-          {this.state.gameStatus ? (
-            <table>
-              <tbody>
-                {board.map((row: Row) => (
-                  <tr>
-                    {row.map((square: Square) => (
-                      <td>{square || '•'}</td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          {this.state.board ? (
+            <GameBoard board={this.state.board} />
           ) : (
             <p> Start a new game</p>
           )}

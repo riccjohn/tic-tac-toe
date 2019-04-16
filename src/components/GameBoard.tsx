@@ -22,10 +22,12 @@ class GameBoard extends React.Component<IBoardProps> {
           <div id='board'>
             <table id='game-table'>
               <tbody>
-                {board.map((row: Row) => (
-                  <tr className='row'>
-                    {row.map((square: Square) => (
-                      <td className='square'>{square || '•'}</td>
+                {board.map((row: Row, rowIdx: number) => (
+                  <tr key={rowIdx} className='row'>
+                    {row.map((square: Square, squareIdx: number) => (
+                      <td key={squareIdx} className='square'>
+                        {square || '•'}
+                      </td>
                     ))}
                   </tr>
                 ))}
