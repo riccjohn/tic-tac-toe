@@ -62,12 +62,13 @@ class Game {
   }
 
   private checkGameForWin(): void {
-    const winCondition =
-      this.checkRowsForWin() ||
-      this.checkColumnsForWin() ||
-      this.checkDiagonalsForWin();
+    const winCondition = [
+      this.checkRowsForWin(),
+      this.checkColumnsForWin(),
+      this.checkDiagonalsForWin()
+    ];
 
-    if (winCondition) {
+    if (winCondition.some(winnerCheck => winnerCheck)) {
       this.winner = this.currentPlayer;
     }
   }
