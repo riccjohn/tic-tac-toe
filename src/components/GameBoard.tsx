@@ -1,12 +1,11 @@
 import * as React from 'react';
-// import { PlayerPiece } from '../PlayerPiece';
 
 interface IBoardProps {
   board: Board;
 }
 
 class GameBoard extends React.Component<IBoardProps> {
-  static defaultProps = {
+  public static defaultProps = {
     board: Array(3)
       .fill(undefined)
       .map(() => Array(3).fill(undefined)),
