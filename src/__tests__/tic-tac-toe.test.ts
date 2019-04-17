@@ -1,4 +1,4 @@
-import Game from '../src/tic-tac-toe';
+import Game from '../tic-tac-toe';
 
 describe('Tic-tac-toe', () => {
   let game: Game;
@@ -78,7 +78,7 @@ describe('Tic-tac-toe', () => {
     expect(game.winner).toEqual('X');
   });
 
-  it("will not detect a winner until a win condition is met", () => {
+  it('will not detect a winner until a win condition is met', () => {
     game.place(0, 0);
     expect(game.winner).toEqual(undefined);
   });
