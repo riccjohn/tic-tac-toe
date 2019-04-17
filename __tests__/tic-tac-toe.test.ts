@@ -1,4 +1,4 @@
-import Game from '../tic-tac-toe';
+import Game from '../src/tic-tac-toe';
 
 describe('Tic-tac-toe', () => {
   let game: Game;

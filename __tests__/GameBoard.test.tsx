@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import GameBoard from '../components/GameBoard';
-// import { PlayerPiece } from '../PlayerPiece';
+import GameBoard from '../src/components/GameBoard';
 
 describe('GameBoard component', () => {
   it('should render a table', () => {
