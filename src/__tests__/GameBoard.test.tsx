@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import GameBoard from '../components/GameBoard';
-import { PlayerPiece } from '../PlayerPiece';
+// import { PlayerPiece } from '../PlayerPiece';
 
 describe('GameBoard component', () => {
   it('should render a table', () => {
@@ -26,10 +26,10 @@ describe('GameBoard component', () => {
   });
 
   it('should render a grid containing player pieces', () => {
-    const testBoard = [
-      [PlayerPiece.X, PlayerPiece.O, PlayerPiece.X],
-      [PlayerPiece.O, PlayerPiece.X, PlayerPiece.O],
-      [PlayerPiece.X, PlayerPiece.O, PlayerPiece.X],
+    const testBoard: Board = [
+      ['X', 'O', 'X'],
+      ['O', 'X', 'O'],
+      ['X', 'O', 'X'],
     ];
     const wrapper = shallow(<GameBoard board={testBoard} />);
     const squares = wrapper.find('.square');

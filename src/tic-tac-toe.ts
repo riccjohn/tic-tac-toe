@@ -1,12 +1,10 @@
-import { PlayerPiece } from './PlayerPiece';
-
 class Game {
   public board: Board;
   public winner: PlayerPiece | undefined;
   private currentPlayer: PlayerPiece;
 
   constructor(private boardSize: number = 3) {
-    this.currentPlayer = PlayerPiece.X;
+    this.currentPlayer = 'X';
     this.board = this.generateBoard();
   }
 
@@ -23,10 +21,10 @@ class Game {
   }
 
   private switchPlayers(): void {
-    if (this.currentPlayer === PlayerPiece.X) {
-      this.currentPlayer = PlayerPiece.O;
+    if (this.currentPlayer === 'X') {
+      this.currentPlayer = 'O';
     } else {
-      this.currentPlayer = PlayerPiece.X;
+      this.currentPlayer = 'X';
     }
   }
 
