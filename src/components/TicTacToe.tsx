@@ -6,8 +6,8 @@ class TicTacToe extends React.Component<any, any> {
   constructor(props: {}) {
     super(props);
     this.state = {
-      board: null,
-      boardSize: null,
+      board: undefined,
+      boardSize: undefined,
     };
   }
 
@@ -19,7 +19,7 @@ class TicTacToe extends React.Component<any, any> {
 
   public submitBoardSize = (event: any): void => {
     event.preventDefault();
-    const newGame = new Game(Number(this.state.boardSize));
+    const newGame = new Game(this.state.boardSize);
     this.setState({
       board: newGame.board,
     });
