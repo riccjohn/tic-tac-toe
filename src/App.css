@@ -1,0 +1,57 @@
+html,
+body {
+  font-size: 12px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.App {
+  margin: 1rem;
+}
+
+.container {
+  width: 100%;
+}
+
+.center-container {
+  width: 85%;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.column {
+  flex-direction: column;
+}
+
+h1 {
+  text-align: center;
+}
+
+button {
+  margin: 2rem;
+}
+
+table {
+  border-collapse: collapse;
+  align-self: center;
+  max-width: 400px;
+  min-width: 250px;
+}
+
+table,
+th,
+td {
+  border: 1px solid black;
+}
+
+td {
+  padding: 2rem;
+  text-align: center;
+}
+
+td:hover {
+  background-color: tomato;
+}

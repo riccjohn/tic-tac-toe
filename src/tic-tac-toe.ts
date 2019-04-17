@@ -1,30 +1,11 @@
-enum PlayerPiece {
-  X = "X",
-  O = "O"
-}
-
-type Square = PlayerPiece | undefined;
-type Row = Square[];
-type Board = Row[];
-
 class Game {
   public board: Board;
-  private currentPlayer: PlayerPiece;
   public winner: PlayerPiece | undefined;
+  private currentPlayer: PlayerPiece;
 
   constructor(private boardSize: number = 3) {
-    this.currentPlayer = PlayerPiece.X;
+    this.currentPlayer = 'X';
     this.board = this.generateBoard();
-  }
-
-  private generateBoard(): Board {
-    return this.eachIndex().map(() => this.eachIndex().map(() => undefined));
-  }
-
-  private switchPlayers(): void {
-    if (this.currentPlayer === PlayerPiece.X)
-      this.currentPlayer = PlayerPiece.O;
-    else this.currentPlayer = PlayerPiece.X;
   }
 
   public place(x: number, y: number): void {
@@ -35,15 +16,27 @@ class Game {
     }
   }
 
+  private generateBoard(): Board {
+    return this.eachIndex().map(() => this.eachIndex().map(() => undefined));
+  }
+
+  private switchPlayers(): void {
+    if (this.currentPlayer === 'X') {
+      this.currentPlayer = 'O';
+    } else {
+      this.currentPlayer = 'X';
+    }
+  }
+
   private eachIndex(): number[] {
-    let array = [];
+    const array = [];
     for (let i = 0; i < this.boardSize; i++) {
       array.push(i);
     }
     return array;
   }
 
-  private isCurrentPlayer = (square: Square) => {
+  private isCurrentPlayer = (square: Square): boolean => {
     return square === this.currentPlayer;
   };
 
@@ -62,7 +55,7 @@ class Game {
   private checkDiagonalsForWin(): boolean {
     const diagonals = [
       this.eachIndex().map(i => this.board[i][i]),
-      this.eachIndex().map(i => this.board[i][this.boardSize - 1 - i])
+      this.eachIndex().map(i => this.board[i][this.boardSize - 1 - i]),
     ];
 
     return diagonals.some(values => values.every(this.isCurrentPlayer));
