@@ -2,7 +2,6 @@ import * as React from 'react';
 
 const GameBoard: React.SFC<IBoardProps> = props => {
   const { data } = props;
-
   const handleClick = (row: number, col: number): any => {
     const coords = { row, col };
     props.handlePlayerInput(coords);
@@ -16,11 +15,11 @@ const GameBoard: React.SFC<IBoardProps> = props => {
             <tbody>
               {data.map((row: Row, rowIdx: number) => (
                 <tr key={rowIdx} className='row'>
-                  {row.map((square: Square, squareIdx: number) => (
+                  {row.map((square: Square, colIdx: number) => (
                     <td
-                      key={squareIdx}
+                      key={colIdx}
                       className='square'
-                      onClick={() => handleClick(rowIdx, squareIdx)}
+                      onClick={() => handleClick(rowIdx, colIdx)}
                     >
                       {square || '•'}
                     </td>
@@ -35,11 +34,6 @@ const GameBoard: React.SFC<IBoardProps> = props => {
       )}
     </React.Fragment>
   );
-};
-
-GameBoard.defaultProps = {
-  handlePlayerInput: (coords: ICoords) =>
-    console.log('DEFAULT PROP', coords.row, coords.col),
 };
 
 export default GameBoard;
