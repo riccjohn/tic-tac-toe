@@ -3,10 +3,12 @@ import Game from '../tic-tac-toe';
 import GameBoard from './GameBoard';
 
 class TicTacToe extends React.Component<any, any> {
+  private game: Game = new Game();
+
   constructor(props: {}) {
     super(props);
     this.state = {
-      boardSize: undefined,
+      board: undefined,
       game: undefined,
     };
   }
@@ -19,17 +21,21 @@ class TicTacToe extends React.Component<any, any> {
 
   public submitBoardSize = (event: any): void => {
     event.preventDefault();
+    this.game = new Game(this.state.boardSize);
     this.setState({
-      game: new Game(this.state.boardSize),
+      board: this.game.board,
     });
   };
 
   public handlePlayerInput = (coords: ICoords): void => {
-    console.log('PARENT', coords.row, coords.col);
+    this.game.place(coords.row, coords.col);
+    this.setState({
+      board: this.game.board,
+    });
   };
 
   public render() {
-    const { game } = this.state;
+    const { board } = this.state;
     return (
       <div className='container center'>
         <div className='center-container center column'>
@@ -40,9 +46,9 @@ class TicTacToe extends React.Component<any, any> {
             <input onChange={this.handleChange} type='text' name='size' />
             <input type='submit' value='submit' />
           </form>
-          {this.state.game ? (
+          {board ? (
             <GameBoard
-              data={game.board}
+              data={board}
               handlePlayerInput={this.handlePlayerInput}
             />
           ) : (
