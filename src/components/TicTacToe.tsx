@@ -6,8 +6,8 @@ class TicTacToe extends React.Component<any, any> {
   constructor(props: {}) {
     super(props);
     this.state = {
-      board: undefined,
       boardSize: undefined,
+      game: undefined,
     };
   }
 
@@ -19,14 +19,17 @@ class TicTacToe extends React.Component<any, any> {
 
   public submitBoardSize = (event: any): void => {
     event.preventDefault();
-    const newGame = new Game(this.state.boardSize);
     this.setState({
-      board: newGame.board,
+      game: new Game(this.state.boardSize),
     });
   };
 
+  public handlePlayerInput = (coords: ICoords): void => {
+    console.log('PARENT', coords.row, coords.col);
+  };
+
   public render() {
-    const { board } = this.state;
+    const { game } = this.state;
     return (
       <div className='container center'>
         <div className='center-container center column'>
@@ -37,8 +40,11 @@ class TicTacToe extends React.Component<any, any> {
             <input onChange={this.handleChange} type='text' name='size' />
             <input type='submit' value='submit' />
           </form>
-          {this.state.board ? (
-            <GameBoard board={this.state.board} />
+          {this.state.game ? (
+            <GameBoard
+              data={game.board}
+              handlePlayerInput={this.handlePlayerInput}
+            />
           ) : (
             <p> Start a new game</p>
           )}
