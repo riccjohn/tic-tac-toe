@@ -42,17 +42,16 @@ class TicTacToe extends React.Component<object, GameState> {
       <div className='container center'>
         <div className='center-container center column'>
           <h1>Tic Tac Toe</h1>
-          <BoardSizeForm
-            handleChange={this.handleChange}
-            handleSubmit={this.submitBoardSize}
-          />
-          {board ? (
+          {!board ? (
+            <BoardSizeForm
+              handleChange={this.handleChange}
+              handleSubmit={this.submitBoardSize}
+            />
+          ) : (
             <GameBoard
               data={board}
               handlePlayerInput={this.handlePlayerInput}
             />
-          ) : (
-            <p> Start a new game</p>
           )}
         </div>
       </div>
