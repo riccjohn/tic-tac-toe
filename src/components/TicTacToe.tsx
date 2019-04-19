@@ -23,7 +23,7 @@ class TicTacToe extends React.Component<object, GameState> {
     });
   };
 
-  public submitBoardSize = (event: any): void => {
+  public submitBoardSize = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
     this.game = new Game(this.state.boardSize);
     this.setState({
