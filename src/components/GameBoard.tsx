@@ -4,7 +4,7 @@ const GameBoard: React.SFC<BoardProps> = props => {
   const { data, handlePlayerInput, reset } = props;
 
   return data ? (
-    <div id='board'>
+    <div id='board' className='center column'>
       <table id='game-table'>
         <tbody>
           {data.map((row, rowIndex) => (
