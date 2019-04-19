@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-const GameBoard: React.SFC<IBoardProps> = props => {
+const GameBoard: React.SFC<BoardProps> = props => {
   const { data, handlePlayerInput } = props;
   const handleClick = (row: number, col: number): any => {
     const coords = { row, col };
@@ -11,13 +11,13 @@ const GameBoard: React.SFC<IBoardProps> = props => {
     <div id='board'>
       <table id='game-table'>
         <tbody>
-          {data.map((row: Row, rowIdx: number) => (
-            <tr key={rowIdx} className='row'>
-              {row.map((square: Square, colIdx: number) => (
+          {data.map((row: Row, rowIndex: number) => (
+            <tr key={rowIndex} className='row'>
+              {row.map((square: Square, columnIndex: number) => (
                 <td
-                  key={colIdx}
+                  key={columnIndex}
                   className='square'
-                  onClick={() => handleClick(rowIdx, colIdx)}
+                  onClick={() => handleClick(rowIndex, columnIndex)}
                 >
                   {square || '•'}
                 </td>

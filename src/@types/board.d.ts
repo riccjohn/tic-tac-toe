@@ -3,12 +3,12 @@ type Square = PlayerPiece | undefined;
 type Row = Square[];
 type Board = Row[];
 
-interface IBoardProps {
-  data?: Board;
-  handlePlayerInput?: any;
+type Coords = {
+  row: number,
+  col: number,
 }
 
-interface ICoords {
-  row: number;
-  col: number;
+type BoardProps = {
+  data: Board,
+  handlePlayerInput: (coords: Coords) => void,
 }

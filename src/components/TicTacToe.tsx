@@ -27,7 +27,7 @@ class TicTacToe extends React.Component<any, any> {
     });
   };
 
-  public handlePlayerInput = (coords: ICoords): void => {
+  public handlePlayerInput = (coords: Coords): void => {
     this.game.place(coords.row, coords.col);
     this.setState({
       board: this.game.board,
