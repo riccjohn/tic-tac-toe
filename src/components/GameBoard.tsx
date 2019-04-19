@@ -2,10 +2,6 @@ import * as React from 'react';
 
 const GameBoard: React.SFC<BoardProps> = props => {
   const { data, handlePlayerInput } = props;
-  const handleClick = (row: number, col: number): any => {
-    const coords = { row, col };
-    handlePlayerInput(coords);
-  };
 
   return data ? (
     <div id='board'>
@@ -17,7 +13,7 @@ const GameBoard: React.SFC<BoardProps> = props => {
                 <td
                   key={columnIndex}
                   className='square'
-                  onClick={() => handleClick(rowIndex, columnIndex)}
+                  onClick={() => handlePlayerInput({row: rowIndex, col: columnIndex})}
                 >
                   {square || '•'}
                 </td>
