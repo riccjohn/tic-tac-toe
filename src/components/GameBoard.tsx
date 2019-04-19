@@ -11,9 +11,9 @@ const GameBoard: React.SFC<BoardProps> = props => {
     <div id='board'>
       <table id='game-table'>
         <tbody>
-          {data.map((row: Row, rowIndex: number) => (
+          {data.map((row, rowIndex) => (
             <tr key={rowIndex} className='row'>
-              {row.map((square: Square, columnIndex: number) => (
+              {row.map((square, columnIndex) => (
                 <td
                   key={columnIndex}
                   className='square'
