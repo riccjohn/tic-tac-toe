@@ -5,6 +5,7 @@ import { GameBoard, BoardSizeForm } from './index';
 type GameState = {
   board?: Board;
   boardSize?: number;
+  error?: string;
 };
 
 class TicTacToe extends React.Component<object, GameState> {
@@ -13,6 +14,14 @@ class TicTacToe extends React.Component<object, GameState> {
   public state = {
     board: undefined,
     boardSize: undefined,
+    error: undefined,
+  };
+
+  private validateBoardSizeInput = (size: number = 0): boolean => {
+    const threeOrAbove = size >= 3;
+    const elevenOrBelow = size <= 10;
+    const isValidInput = threeOrAbove && elevenOrBelow;
+    return isValidInput;
   };
 
   public handleChange = (event: React.FormEvent<HTMLInputElement>): void => {
@@ -23,10 +32,16 @@ class TicTacToe extends React.Component<object, GameState> {
 
   public submitBoardSize = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    this.game = new Game(this.state.boardSize);
-    this.setState({
-      board: this.game.board,
-    });
+    if (this.validateBoardSizeInput(this.state.boardSize)) {
+      this.game = new Game(this.state.boardSize);
+      this.setState({
+        board: this.game.board,
+      });
+    } else {
+      this.setState({
+        error: 'Invalid input',
+      });
+    }
   };
 
   public handlePlayerInput = (coords: Coords): void => {
