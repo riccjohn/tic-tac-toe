@@ -36,6 +36,12 @@ class TicTacToe extends React.Component<object, GameState> {
     });
   };
 
+  public resetGame = (): void => {
+    this.setState({
+      board: undefined,
+    });
+  };
+
   public render() {
     const { board } = this.state;
     return (
@@ -51,6 +57,7 @@ class TicTacToe extends React.Component<object, GameState> {
             <GameBoard
               data={board}
               handlePlayerInput={this.handlePlayerInput}
+              reset={this.resetGame}
             />
           )}
         </div>

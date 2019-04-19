@@ -7,7 +7,11 @@ describe('GameBoard component', () => {
   it('should render a table', () => {
     const boardArray = createBoard(3, undefined);
     const wrapper = shallow(
-      <GameBoard data={boardArray} handlePlayerInput={jest.fn()} />
+      <GameBoard
+        data={boardArray}
+        handlePlayerInput={jest.fn()}
+        reset={jest.fn()}
+      />
     );
     expect(wrapper.find('table#game-table').exists()).toBe(true);
   });
@@ -18,7 +22,11 @@ describe('GameBoard component', () => {
       .map(() => Array(5).fill(undefined));
 
     const wrapper = shallow(
-      <GameBoard data={testBoard} handlePlayerInput={jest.fn()} />
+      <GameBoard
+        data={testBoard}
+        handlePlayerInput={jest.fn()}
+        reset={jest.fn()}
+      />
     );
     const squares = wrapper.find('.square');
     expect(squares).toHaveLength(25);
@@ -31,7 +39,11 @@ describe('GameBoard component', () => {
       ['X', 'O', 'X'],
     ];
     const wrapper = shallow(
-      <GameBoard data={testBoard} handlePlayerInput={jest.fn()} />
+      <GameBoard
+        data={testBoard}
+        handlePlayerInput={jest.fn()}
+        reset={jest.fn()}
+      />
     );
     const squares = wrapper.find('.square');
     expect(squares).toHaveLength(9);
