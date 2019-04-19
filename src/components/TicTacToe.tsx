@@ -2,20 +2,24 @@ import * as React from 'react';
 import Game from '../tic-tac-toe';
 import GameBoard from './GameBoard';
 
-class TicTacToe extends React.Component<any, any> {
+type GameState = {
+  board?: Board;
+  boardSize?: number;
+  game?: Game;
+};
+
+class TicTacToe extends React.Component<object, GameState> {
   private game: Game = new Game();
 
-  constructor(props: {}) {
-    super(props);
-    this.state = {
-      board: undefined,
-      game: undefined,
-    };
-  }
+  public state = {
+    board: undefined,
+    boardSize: undefined,
+    game: undefined,
+  };
 
   public handleChange = (event: React.FormEvent<HTMLInputElement>): void => {
     this.setState({
-      boardSize: event.currentTarget.value,
+      boardSize: Number(event.currentTarget.value),
     });
   };
 
