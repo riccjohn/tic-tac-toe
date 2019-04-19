@@ -5,7 +5,6 @@ import GameBoard from './GameBoard';
 type GameState = {
   board?: Board;
   boardSize?: number;
-  game?: Game;
 };
 
 class TicTacToe extends React.Component<object, GameState> {
@@ -14,7 +13,6 @@ class TicTacToe extends React.Component<object, GameState> {
   public state = {
     board: undefined,
     boardSize: undefined,
-    game: undefined,
   };
 
   public handleChange = (event: React.FormEvent<HTMLInputElement>): void => {
