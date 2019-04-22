@@ -1,12 +1,6 @@
 import * as React from 'react';
 import { Error } from './index';
 
-type BoardFormProps = {
-  handleChange: (event: React.FormEvent<HTMLInputElement>) => void;
-  handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
-  error: boolean;
-};
-
 const BoardSizeForm: React.SFC<BoardFormProps> = props => {
   const { handleChange, handleSubmit, error } = props;
   return (

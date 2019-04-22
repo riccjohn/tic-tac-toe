@@ -2,12 +2,6 @@ import * as React from 'react';
 import Game from '../tic-tac-toe';
 import { GameBoard, BoardSizeForm } from './index';
 
-type GameState = {
-  board?: Board;
-  boardSize?: number;
-  error?: boolean;
-};
-
 class TicTacToe extends React.Component<object, GameState> {
   private game: Game = new Game();
 
@@ -36,8 +30,6 @@ class TicTacToe extends React.Component<object, GameState> {
 
   public submitBoardSize = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    /* TODO: an undefined value should still pass, since a user should be able
-    to create a 3x3 by default. Maybe I need to set a default value in the actual form? */
     if (this.validateBoardSizeInput(this.state.boardSize)) {
       this.game = new Game(this.state.boardSize);
       this.setState({
