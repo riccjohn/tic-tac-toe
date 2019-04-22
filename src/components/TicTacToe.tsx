@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Game from '../tic-tac-toe';
-import { GameBoard, BoardSizeForm } from './index';
+import GameBoard from './GameBoard';
+import BoardSizeForm from './BoardSizeForm';
 
 class TicTacToe extends React.Component<object, GameState> {
   private game: Game = new Game();
