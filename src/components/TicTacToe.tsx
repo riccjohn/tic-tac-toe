@@ -5,7 +5,7 @@ import { GameBoard, BoardSizeForm } from './index';
 type GameState = {
   board?: Board;
   boardSize?: number;
-  error?: string;
+  error?: boolean;
 };
 
 class TicTacToe extends React.Component<object, GameState> {
@@ -14,13 +14,17 @@ class TicTacToe extends React.Component<object, GameState> {
   public state = {
     board: undefined,
     boardSize: undefined,
-    error: undefined,
+    error: false,
   };
 
-  private validateBoardSizeInput = (size: number = 0): boolean => {
+  private validateBoardSizeInput = (size?: number): boolean => {
+    if (size === undefined) {
+      return true;
+    }
+    const isNotNull = size !== null;
     const threeOrAbove = size >= 3;
     const elevenOrBelow = size <= 10;
-    const isValidInput = threeOrAbove && elevenOrBelow;
+    const isValidInput = threeOrAbove && elevenOrBelow && isNotNull;
     return isValidInput;
   };
 
@@ -32,6 +36,8 @@ class TicTacToe extends React.Component<object, GameState> {
 
   public submitBoardSize = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
+    /* TODO: an undefined value should still pass, since a user should be able
+    to create a 3x3 by default. Maybe I need to set a default value in the actual form? */
     if (this.validateBoardSizeInput(this.state.boardSize)) {
       this.game = new Game(this.state.boardSize);
       this.setState({
@@ -39,7 +45,7 @@ class TicTacToe extends React.Component<object, GameState> {
       });
     } else {
       this.setState({
-        error: 'Invalid input',
+        error: true,
       });
     }
   };
@@ -54,6 +60,7 @@ class TicTacToe extends React.Component<object, GameState> {
   public resetGame = (): void => {
     this.setState({
       board: undefined,
+      error: false,
     });
   };
 
@@ -67,6 +74,7 @@ class TicTacToe extends React.Component<object, GameState> {
             <BoardSizeForm
               handleChange={this.handleChange}
               handleSubmit={this.submitBoardSize}
+              error={this.state.error}
             />
           ) : (
             <GameBoard
