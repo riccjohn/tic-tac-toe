@@ -2,26 +2,39 @@ import * as React from 'react';
 import Game from '../tic-tac-toe';
 import GameBoard from './GameBoard';
 
-class TicTacToe extends React.Component<any, any> {
-  constructor(props: {}) {
-    super(props);
-    this.state = {
-      board: null,
-      boardSize: null,
-    };
-  }
+type GameState = {
+  board?: Board;
+  boardSize?: number;
+  game?: Game;
+};
+
+class TicTacToe extends React.Component<object, GameState> {
+  private game: Game = new Game();
+
+  public state = {
+    board: undefined,
+    boardSize: undefined,
+    game: undefined,
+  };
 
   public handleChange = (event: React.FormEvent<HTMLInputElement>): void => {
     this.setState({
-      boardSize: event.currentTarget.value,
+      boardSize: Number(event.currentTarget.value),
     });
   };
 
-  public submitBoardSize = (event: any): void => {
+  public submitBoardSize = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    const newGame = new Game(Number(this.state.boardSize));
+    this.game = new Game(this.state.boardSize);
     this.setState({
-      board: newGame.board,
+      board: this.game.board,
+    });
+  };
+
+  public handlePlayerInput = (coords: Coords): void => {
+    this.game.place(coords.row, coords.col);
+    this.setState({
+      board: this.game.board,
     });
   };
 
@@ -37,8 +50,11 @@ class TicTacToe extends React.Component<any, any> {
             <input onChange={this.handleChange} type='text' name='size' />
             <input type='submit' value='submit' />
           </form>
-          {this.state.board ? (
-            <GameBoard board={this.state.board} />
+          {board ? (
+            <GameBoard
+              data={board}
+              handlePlayerInput={this.handlePlayerInput}
+            />
           ) : (
             <p> Start a new game</p>
           )}
