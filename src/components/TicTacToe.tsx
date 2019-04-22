@@ -10,6 +10,7 @@ class TicTacToe extends React.Component<object, GameState> {
     board: undefined,
     boardSize: undefined,
     error: false,
+    winner: undefined,
   };
 
   private validateBoardSizeInput = (size?: number): boolean => {
@@ -48,6 +49,11 @@ class TicTacToe extends React.Component<object, GameState> {
     this.setState({
       board: this.game.board,
     });
+    if (this.game.winner) {
+      this.setState({
+        winner: this.game.winner,
+      });
+    }
   };
 
   public resetGame = (): void => {
@@ -59,6 +65,7 @@ class TicTacToe extends React.Component<object, GameState> {
 
   public render() {
     const { board } = this.state;
+    const inputHandler = this.game.winner ? () => null : this.handlePlayerInput;
     return (
       <div className='container center'>
         <div className='center-container center column'>
@@ -72,8 +79,9 @@ class TicTacToe extends React.Component<object, GameState> {
           ) : (
             <GameBoard
               data={board}
-              handlePlayerInput={this.handlePlayerInput}
+              handlePlayerInput={inputHandler}
               reset={this.resetGame}
+              winner={this.state.winner}
             />
           )}
         </div>
