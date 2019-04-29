@@ -9,7 +9,7 @@ class TicTacToe extends React.Component<object, GameState> {
   public state = {
     board: undefined,
     boardSize: undefined,
-    error: false,
+    hasError: false,
   };
 
   private validateBoardSizeInput = (size?: number): boolean => {
@@ -38,7 +38,7 @@ class TicTacToe extends React.Component<object, GameState> {
       });
     } else {
       this.setState({
-        error: true,
+        hasError: true,
       });
     }
   };
@@ -53,7 +53,7 @@ class TicTacToe extends React.Component<object, GameState> {
   public resetGame = (): void => {
     this.setState({
       board: undefined,
-      error: false,
+      hasError: false,
     });
   };
 
@@ -67,7 +67,7 @@ class TicTacToe extends React.Component<object, GameState> {
             <BoardSizeForm
               handleChange={this.handleChange}
               handleSubmit={this.submitBoardSize}
-              error={this.state.error}
+              hasError={this.state.hasError}
             />
           ) : (
             <GameBoard
