@@ -12,14 +12,15 @@ class TicTacToe extends React.Component<object, GameState> {
     hasError: false,
   };
 
-  private validateBoardSizeInput = (size?: number): boolean => {
+  private validateBoardSizeInput = (): boolean => {
+    const size = this.state.boardSize;
     if (size === undefined) {
       return true;
     }
-    const isNotNull = size !== null;
+    const isPresent = size !== null;
     const threeOrAbove = size >= 3;
     const elevenOrBelow = size <= 10;
-    const isValidInput = threeOrAbove && elevenOrBelow && isNotNull;
+    const isValidInput = threeOrAbove && elevenOrBelow && isPresent;
     return isValidInput;
   };
 
@@ -31,7 +32,7 @@ class TicTacToe extends React.Component<object, GameState> {
 
   public submitBoardSize = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    if (this.validateBoardSizeInput(this.state.boardSize)) {
+    if (this.validateBoardSizeInput()) {
       this.game = new Game(this.state.boardSize);
       this.setState({
         board: this.game.board,
