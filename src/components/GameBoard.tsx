@@ -1,10 +1,11 @@
 import * as React from 'react';
 
 const GameBoard: React.SFC<BoardProps> = props => {
-  const { data, handlePlayerInput, reset } = props;
+  const { data, handlePlayerInput, reset, winner } = props;
 
   return data ? (
     <div id='board' className='center column'>
+      {winner && <h1>{`Winner is ${winner}`}</h1>}
       <table id='game-table'>
         <tbody>
           {data.map((row, rowIndex) => (

@@ -60,6 +60,7 @@ class TicTacToe extends React.Component<object, GameState> {
 
   public render() {
     const { board } = this.state;
+    const inputHandler = this.game.winner ? () => {} : this.handlePlayerInput;
     return (
       <div className='container center'>
         <div className='center-container center column'>
@@ -73,8 +74,9 @@ class TicTacToe extends React.Component<object, GameState> {
           ) : (
             <GameBoard
               data={board}
-              handlePlayerInput={this.handlePlayerInput}
+              handlePlayerInput={inputHandler}
               reset={this.resetGame}
+              winner={this.game.winner}
             />
           )}
         </div>
