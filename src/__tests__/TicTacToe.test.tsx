@@ -2,7 +2,7 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 import TicTacToe from '../components/TicTacToe';
 
-describe('TTT component', () => {
+describe('TicTacToe component', () => {
   it('should render title', () => {
     const wrapper = shallow(<TicTacToe />);
     expect(wrapper.contains(<h1>Tic Tac Toe</h1>)).toEqual(true);
