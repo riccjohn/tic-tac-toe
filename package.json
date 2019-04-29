@@ -4,7 +4,8 @@
   "description": "Apprenticeship project - tic-tac-toe written in TypeScript",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watchAll --verbose",
+    "test": "jest",
+    "test-watch": "jest --watchAll --verbose",
     "start": "webpack-dev-server --mode development --hot",
     "build": "webpack --mode development"
   },
