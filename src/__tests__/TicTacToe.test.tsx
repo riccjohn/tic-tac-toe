@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { shallow, render, mount } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import TicTacToe from '../components/TicTacToe';
 
 describe('TicTacToe component', () => {
@@ -13,18 +13,16 @@ describe('TicTacToe component', () => {
     expect(wrapper.find('BoardSizeForm').exists()).toBe(true);
   });
 
-  it('will render the Error component if necessary', () => {
+  it('will render the Board component if given invalid input', () => {
     const wrapper = mount(<TicTacToe />);
-    expect(
-      wrapper.contains(
-        <p>Error: Invalid input. Please input a number from 3 - 10</p>
-      )
-    ).toBeFalsy();
-    wrapper.setState({ hasError: true });
-    expect(
-      wrapper.contains(
-        <p>Error: Invalid input. Please input a number from 3 - 10</p>
-      )
-    ).toBeTruthy();
+    const input = wrapper.find('input').at(0);
+
+    (input.instance() as React.DetailedHTMLProps<
+      React.InputHTMLAttributes<HTMLInputElement>,
+      HTMLInputElement
+    >).value = '3';
+    input.simulate('change');
+    wrapper.find('form').simulate('submit');
+    expect(wrapper.find('#board')).toHaveLength(1);
   });
 });
