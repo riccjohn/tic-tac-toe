@@ -8,7 +8,7 @@ jobs:
   include:
     - stage: Tests
       node_js: node
-      script: jest --coverage --coverageReporters=text-lcov | $(npm bin)/coveralls
+      script: jest
     - stage: Coverage
       node_js: node
       script: jest --coverage
