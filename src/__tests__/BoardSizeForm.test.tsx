@@ -4,13 +4,13 @@ import BoardSizeForm from '../components/BoardSizeForm';
 
 describe('BoardSizeForm component', () => {
   it('renders a form', () => {
-    const wrapper = shallow(<BoardSizeForm handleSubmit={jest.fn()} />);
+    const wrapper = shallow(<BoardSizeForm onSubmit={jest.fn()} />);
     expect(wrapper.exists('.size-form')).toBeTruthy();
   });
 
   it('renders an error if given one', () => {
     const wrapper = mount(
-      <BoardSizeForm handleSubmit={jest.fn()} hasError={true} />
+      <BoardSizeForm onSubmit={jest.fn()} hasError={true} />
     );
     expect(
       wrapper.contains(
@@ -19,19 +19,19 @@ describe('BoardSizeForm component', () => {
     ).toBeTruthy();
   });
 
-  it('calls its handleChange method', () => {
+  it('calls its onChange method', () => {
     const mockFn = jest.fn();
     const wrapper = shallow(
-      <BoardSizeForm handleSubmit={jest.fn()} handleChange={mockFn} />
+      <BoardSizeForm onSubmit={jest.fn()} onChange={mockFn} />
     );
     expect(mockFn.mock.calls).toHaveLength(0);
     wrapper.find("form input[name='size']").simulate('change');
     expect(mockFn.mock.calls).toHaveLength(1);
   });
 
-  it('calls its handleSubmit method', () => {
+  it('calls its onSubmit method', () => {
     const mockFn = jest.fn();
-    const wrapper = shallow(<BoardSizeForm handleSubmit={mockFn} />);
+    const wrapper = shallow(<BoardSizeForm onSubmit={mockFn} />);
     expect(mockFn.mock.calls).toHaveLength(0);
     wrapper.find('form').simulate('submit');
     expect(mockFn.mock.calls).toHaveLength(1);
