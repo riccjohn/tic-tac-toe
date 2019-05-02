@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { shallow, mount } from 'enzyme';
 import TicTacToe from '../components/TicTacToe';
+import { fill } from '../helperFunctions/testUtils';
 
 describe('TicTacToe component', () => {
   it('should render title', () => {
@@ -13,29 +14,9 @@ describe('TicTacToe component', () => {
     expect(wrapper.find('BoardSizeForm').exists()).toBe(true);
   });
 
-  it('will render the Board component if given invalid input', () => {
-    const wrapper = mount(<TicTacToe />);
-    const input = wrapper.find("form input[name='size']");
-
-    (input.instance() as React.DetailedHTMLProps<
-      React.InputHTMLAttributes<HTMLInputElement>,
-      HTMLInputElement
-    >).value = '3';
-    input.simulate('change');
-    wrapper.find('form').simulate('submit');
-    expect(wrapper.find('#board')).toHaveLength(1);
-  });
-
   it('will render the Error component if given invalid input', () => {
     const wrapper = mount(<TicTacToe />);
-    const input = wrapper.find("form input[name='size']");
-
-    (input.instance() as React.DetailedHTMLProps<
-      React.InputHTMLAttributes<HTMLInputElement>,
-      HTMLInputElement
-    >).value = '1';
-
-    input.simulate('change');
+    fill(wrapper, 'form input[type="text"]', '1');
     wrapper.find('form').simulate('submit');
     expect(wrapper.find('#board')).toHaveLength(0);
     expect(
@@ -47,14 +28,7 @@ describe('TicTacToe component', () => {
 
   it('will render a 4x4 game board given an input of 4', () => {
     const wrapper = mount(<TicTacToe />);
-    const input = wrapper.find("form input[name='size']");
-
-    (input.instance() as React.DetailedHTMLProps<
-      React.InputHTMLAttributes<HTMLInputElement>,
-      HTMLInputElement
-    >).value = '4';
-
-    input.simulate('change');
+    fill(wrapper, 'form input[type="text"]', '4');
     wrapper.find('form').simulate('submit');
     expect(wrapper.find('td')).toHaveLength(16);
   });
@@ -85,14 +59,7 @@ describe('TicTacToe component', () => {
 
   it('will allow you to reset the game board', () => {
     const wrapper = mount(<TicTacToe />);
-    const input = wrapper.find("form input[name='size']");
-
-    (input.instance() as React.DetailedHTMLProps<
-      React.InputHTMLAttributes<HTMLInputElement>,
-      HTMLInputElement
-    >).value = '4';
-
-    input.simulate('change');
+    fill(wrapper, 'form input[type="text"]', '4');
     wrapper.find('form').simulate('submit');
     wrapper.find('button').simulate('click');
     expect(wrapper.find('.size-form')).toHaveLength(1);
