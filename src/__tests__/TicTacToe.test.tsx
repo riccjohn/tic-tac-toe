@@ -15,7 +15,7 @@ describe('TicTacToe component', () => {
 
   it('will render the Board component if given invalid input', () => {
     const wrapper = mount(<TicTacToe />);
-    const input = wrapper.find('#size-input');
+    const input = wrapper.find("form input[name='size']");
 
     (input.instance() as React.DetailedHTMLProps<
       React.InputHTMLAttributes<HTMLInputElement>,
@@ -28,7 +28,7 @@ describe('TicTacToe component', () => {
 
   it('will render the Error component if given invalid input', () => {
     const wrapper = mount(<TicTacToe />);
-    const input = wrapper.find('#size-input');
+    const input = wrapper.find("form input[name='size']");
 
     (input.instance() as React.DetailedHTMLProps<
       React.InputHTMLAttributes<HTMLInputElement>,
@@ -47,7 +47,7 @@ describe('TicTacToe component', () => {
 
   it('will render a 4x4 game board given an input of 4', () => {
     const wrapper = mount(<TicTacToe />);
-    const input = wrapper.find('#size-input');
+    const input = wrapper.find("form input[name='size']");
 
     (input.instance() as React.DetailedHTMLProps<
       React.InputHTMLAttributes<HTMLInputElement>,
@@ -85,7 +85,7 @@ describe('TicTacToe component', () => {
 
   it('will allow you to reset the game board', () => {
     const wrapper = mount(<TicTacToe />);
-    const input = wrapper.find('#size-input');
+    const input = wrapper.find("form input[name='size']");
 
     (input.instance() as React.DetailedHTMLProps<
       React.InputHTMLAttributes<HTMLInputElement>,

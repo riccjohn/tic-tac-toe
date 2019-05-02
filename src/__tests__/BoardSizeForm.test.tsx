@@ -11,7 +11,7 @@ describe('BoardSizeForm component', () => {
         hasError={false}
       />
     );
-    expect(wrapper.exists('#size-form')).toBeTruthy();
+    expect(wrapper.exists('.size-form')).toBeTruthy();
   });
 
   it('renders an error if given one', () => {
@@ -39,9 +39,7 @@ describe('BoardSizeForm component', () => {
       />
     );
     expect(mockFn.mock.calls).toHaveLength(0);
-    wrapper
-      .find('#size-input')
-      .simulate('change', { target: { value: '123' } });
+    wrapper.find("form input[name='size']").simulate('change');
     expect(mockFn.mock.calls).toHaveLength(1);
   });
 
