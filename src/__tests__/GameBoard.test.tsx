@@ -48,4 +48,40 @@ describe('GameBoard component', () => {
     const squares = wrapper.find('.square');
     expect(squares).toHaveLength(9);
   });
+
+  it('should call the handlePlayerInput function when a player clicks a cell', () => {
+    const boardArray = createBoard(3, undefined);
+    const mockFn = jest.fn();
+    const wrapper = shallow(
+      <GameBoard
+        data={boardArray}
+        handlePlayerInput={mockFn}
+        reset={jest.fn()}
+      />
+    );
+    expect(mockFn.mock.calls).toHaveLength(0);
+    wrapper
+      .find('.square')
+      .at(0)
+      .simulate('click');
+    expect(mockFn.mock.calls).toHaveLength(1);
+  });
+
+  it('should call the reset function when a player clicks the reset button', () => {
+    const boardArray = createBoard(3, undefined);
+    const mockFn = jest.fn();
+    const wrapper = shallow(
+      <GameBoard
+        data={boardArray}
+        handlePlayerInput={jest.fn()}
+        reset={mockFn}
+      />
+    );
+    expect(mockFn.mock.calls).toHaveLength(0);
+    wrapper
+      .find('button')
+      .at(0)
+      .simulate('click');
+    expect(mockFn.mock.calls).toHaveLength(1);
+  });
 });
