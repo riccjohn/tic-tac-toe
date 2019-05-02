@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-const Error: React.SFC<any> = props => {
+const Error: React.SFC<any> = () => {
   return (
     <div>
       <p>Error: Invalid input. Please input a number from 3 - 10</p>
