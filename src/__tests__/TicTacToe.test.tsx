@@ -61,7 +61,7 @@ describe('TicTacToe component', () => {
     const wrapper = mount(<TicTacToe />);
     fill(wrapper, 'form input[type="text"]', '4');
     wrapper.find('form').simulate('submit');
-    wrapper.find('button').simulate('click');
+    wrapper.find('.reset').simulate('click');
     expect(wrapper.find('.size-form')).toHaveLength(1);
   });
 
