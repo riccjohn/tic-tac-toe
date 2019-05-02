@@ -95,6 +95,39 @@ describe('TicTacToe component', () => {
     input.simulate('change');
     wrapper.find('form').simulate('submit');
     wrapper.find('button').simulate('click');
-    expect(wrapper.find('#size-form')).toHaveLength(1);
+    expect(wrapper.find('.size-form')).toHaveLength(1);
+  });
+
+  it('should display a winner when the game has been won', () => {
+    const wrapper = mount(<TicTacToe />);
+    wrapper.find('form').simulate('submit');
+
+    wrapper
+      .find('td')
+      .at(0)
+      .simulate('click');
+
+    wrapper
+      .find('td')
+      .at(4)
+      .simulate('click');
+
+    wrapper
+      .find('td')
+      .at(1)
+      .simulate('click');
+
+    wrapper
+      .find('td')
+      .at(5)
+      .simulate('click');
+
+    wrapper
+      .find('td')
+      .at(2)
+      .simulate('click');
+
+    expect(wrapper.contains(<h1>Winner is O</h1>)).toBeFalsy();
+    expect(wrapper.contains(<h1>Winner is X</h1>)).toBeTruthy();
   });
 });
