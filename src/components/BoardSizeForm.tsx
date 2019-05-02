@@ -21,4 +21,9 @@ const BoardSizeForm: React.SFC<BoardFormProps> = props => {
   );
 };
 
+BoardSizeForm.defaultProps = {
+  handleChange: () => {},
+  hasError: false,
+};
+
 export default BoardSizeForm;

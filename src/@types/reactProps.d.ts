@@ -6,7 +6,7 @@ type BoardProps = {
 };
 
 type BoardFormProps = {
-  handleChange: (event: React.FormEvent<HTMLInputElement>) => void;
+  handleChange?: (event: React.FormEvent<HTMLInputElement>) => void;
   handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
-  hasError: boolean;
+  hasError?: boolean;
 };
