@@ -6,8 +6,8 @@ script: echo "Running tests against $(node -v)..."
 
 jobs:
   include:
-  - stage: Testing
-    node_js: node
-    script:
-    - jest
-    - jest --coverage --coverageReporters=text-lcov | $(npm bin)/coveralls
+    - stage: Testing
+      node_js: node
+      script:
+        - jest
+        - jest --coverage --coverageReporters=text-lcov | $(npm bin)/coveralls
