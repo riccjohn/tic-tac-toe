@@ -3,7 +3,7 @@ import { shallow, mount } from 'enzyme';
 import BoardSizeForm from '../components/BoardSizeForm';
 
 describe('BoardSizeForm component', () => {
-  it('Renders a form', () => {
+  it('renders a form', () => {
     const wrapper = shallow(
       <BoardSizeForm
         handleChange={jest.fn()}
@@ -14,7 +14,7 @@ describe('BoardSizeForm component', () => {
     expect(wrapper.exists('#size-form')).toBeTruthy();
   });
 
-  it('Renders an error if given one', () => {
+  it('renders an error if given one', () => {
     const wrapper = mount(
       <BoardSizeForm
         handleChange={jest.fn()}
@@ -29,7 +29,7 @@ describe('BoardSizeForm component', () => {
     ).toBeTruthy();
   });
 
-  it('Calls its handleChange method', () => {
+  it('calls its handleChange method', () => {
     const mockFn = jest.fn();
     const wrapper = shallow(
       <BoardSizeForm
@@ -40,13 +40,12 @@ describe('BoardSizeForm component', () => {
     );
     expect(mockFn.mock.calls).toHaveLength(0);
     wrapper
-      .find('input')
-      .at(0)
+      .find('#size-input')
       .simulate('change', { target: { value: '123' } });
     expect(mockFn.mock.calls).toHaveLength(1);
   });
 
-  it('Calls its handleSubmit method', () => {
+  it('calls its handleSubmit method', () => {
     const mockFn = jest.fn();
     const wrapper = shallow(
       <BoardSizeForm
