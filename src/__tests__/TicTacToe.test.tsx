@@ -61,8 +61,11 @@ describe('TicTacToe component', () => {
     const wrapper = mount(<TicTacToe />);
     fill(wrapper, 'form input[type="text"]', '4');
     wrapper.find('form').simulate('submit');
+    expect(wrapper.find('.size-form')).toHaveLength(0);
+    expect(wrapper.find('td')).toHaveLength(16);
     wrapper.find('.reset').simulate('click');
     expect(wrapper.find('.size-form')).toHaveLength(1);
+    expect(wrapper.find('td')).toHaveLength(0);
   });
 
   it('should display a winner when the game has been won', () => {
