@@ -2,18 +2,28 @@ import * as React from 'react';
 import Error from './Error';
 
 const BoardSizeForm: React.SFC<BoardFormProps> = props => {
-  const { handleChange, handleSubmit, hasError } = props;
+  const { onChange, onSubmit, hasError } = props;
   return (
     <React.Fragment>
       <p>What size should the board be?</p>
-      <form id='size-form' onSubmit={handleSubmit}>
+      <form className='size-form' onSubmit={onSubmit}>
         Board Size:
-        <input onChange={handleChange} type='text' name='size' />
-        <input id='size-submit' type='submit' value='submit' />
+        <input
+          onChange={onChange}
+          type='text'
+          name='size'
+          aria-label='board size input'
+        />
+        <input className='size-submit' type='submit' value='submit' />
       </form>
       {hasError && <Error />}
     </React.Fragment>
   );
+};
+
+BoardSizeForm.defaultProps = {
+  onChange: () => {},
+  hasError: false,
 };
 
 export default BoardSizeForm;

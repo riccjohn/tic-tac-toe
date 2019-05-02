@@ -25,7 +25,9 @@ const GameBoard: React.SFC<BoardProps> = props => {
           ))}
         </tbody>
       </table>
-      <button onClick={reset}>Reset</button>
+      <button className='reset' onClick={reset}>
+        Reset
+      </button>
     </div>
   ) : (
     <h1>NO_BOARD</h1>

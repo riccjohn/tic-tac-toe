@@ -24,7 +24,7 @@ class TicTacToe extends React.Component<object, GameState> {
     return isValidInput;
   };
 
-  public handleChange = (event: React.FormEvent<HTMLInputElement>): void => {
+  public onChange = (event: React.FormEvent<HTMLInputElement>): void => {
     this.setState({
       boardSize: Number(event.currentTarget.value),
     });
@@ -67,8 +67,8 @@ class TicTacToe extends React.Component<object, GameState> {
           <h1>Tic Tac Toe</h1>
           {!board ? (
             <BoardSizeForm
-              handleChange={this.handleChange}
-              handleSubmit={this.submitBoardSize}
+              onChange={this.onChange}
+              onSubmit={this.submitBoardSize}
               hasError={this.state.hasError}
             />
           ) : (
