@@ -1,3 +1,5 @@
+import { transposeVectors } from './helperFunctions/transpose';
+
 class Game {
   public board: Board;
   public winner: PlayerPiece | undefined;
@@ -45,7 +47,7 @@ class Game {
   private checkRowsForWin(): boolean {
     const hasWinner = this.board.some(row => row.every(this.isCurrentPlayer));
 
-    const winningCells: number[][] = [];
+    const winningCells: Vectors = [];
 
     if (hasWinner) {
       this.board.forEach((row, rowIndex) => {
@@ -66,16 +68,49 @@ class Game {
       this.board.map(row => row[i])
     );
 
-    return transposedBoard.some(row => row.every(this.isCurrentPlayer));
+    const hasWinner = transposedBoard.some(row =>
+      row.every(this.isCurrentPlayer)
+    );
+
+    const winningCells: Vectors = [];
+
+    if (hasWinner) {
+      transposedBoard.forEach((row, rowIndex) => {
+        if (row.every(value => this.isCurrentPlayer(value))) {
+          for (let i = 0; i < row.length; i++) {
+            winningCells.push([rowIndex, i]);
+          }
+        }
+      });
+      this.winningCells = transposeVectors(winningCells);
+    }
+
+    return hasWinner;
   }
 
   private checkDiagonalsForWin(): boolean {
-    const diagonals = [
-      this.eachIndex().map(i => this.board[i][i]),
-      this.eachIndex().map(i => this.board[i][this.boardSize - 1 - i]),
-    ];
+    const leftToRightDiagonalWin = this.eachIndex()
+      .map(i => this.board[i][i])
+      .every(this.isCurrentPlayer);
 
-    return diagonals.some(values => values.every(this.isCurrentPlayer));
+    const rightToLeftDiagonalWin = this.eachIndex()
+      .map(i => this.board[i][this.boardSize - 1 - i])
+      .every(this.isCurrentPlayer);
+
+    const hasWinner = leftToRightDiagonalWin || rightToLeftDiagonalWin;
+
+    let winningCells: Vectors;
+
+    if (hasWinner) {
+      if (leftToRightDiagonalWin) {
+        winningCells = this.eachIndex().map(i => [i, i]);
+      } else {
+        winningCells = this.eachIndex().map(i => [i, this.boardSize - 1 - i]);
+      }
+      this.winningCells = winningCells;
+    }
+
+    return hasWinner;
   }
 
   private checkGameForWin(): void {
