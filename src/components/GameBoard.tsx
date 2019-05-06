@@ -11,7 +11,7 @@ function GameBoard(props: BoardProps) {
     winningCells,
   } = props;
 
-  return data ? (
+  return (
     <div id='board' className='center column'>
       {winner && <h1>{`Winner is ${winner}`}</h1>}
       <table id='game-table'>
@@ -41,8 +41,6 @@ function GameBoard(props: BoardProps) {
         Reset
       </button>
     </div>
-  ) : (
-    <h1>NO_BOARD</h1>
   );
 }
 
