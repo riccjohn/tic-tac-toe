@@ -58,6 +58,10 @@ class TicTacToe extends React.Component<object, GameState> {
     });
   };
 
+  public getValue = (square: Square): Square => {
+    return square;
+  };
+
   public render() {
     const { board } = this.state;
     const inputHandler = this.game.winner ? () => {} : this.handlePlayerInput;
@@ -77,6 +81,7 @@ class TicTacToe extends React.Component<object, GameState> {
               handlePlayerInput={inputHandler}
               reset={this.resetGame}
               winner={this.game.winner}
+              getValue={this.getValue}
             />
           )}
         </div>

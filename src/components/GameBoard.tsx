@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 const GameBoard: React.SFC<BoardProps> = props => {
-  const { data, handlePlayerInput, reset, winner } = props;
+  const { data, handlePlayerInput, reset, winner, getValue } = props;
 
   return data ? (
     <div id='board' className='center column'>
@@ -18,7 +18,7 @@ const GameBoard: React.SFC<BoardProps> = props => {
                     handlePlayerInput({ row: rowIndex, col: columnIndex })
                   }
                 >
-                  {square || '•'}
+                  {getValue(square)}
                 </td>
               ))}
             </tr>
@@ -32,6 +32,10 @@ const GameBoard: React.SFC<BoardProps> = props => {
   ) : (
     <h1>NO_BOARD</h1>
   );
+};
+
+GameBoard.defaultProps = {
+  getValue: square => square,
 };
 
 export default GameBoard;
