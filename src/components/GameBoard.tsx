@@ -1,7 +1,9 @@
 import * as React from 'react';
+import { hasSubArray } from '../helperFunctions/hasSubArray';
 
 function GameBoard(props: BoardProps) {
   const { data, handlePlayerInput, reset, winner, getValue } = props;
+  const winners = [[0, 0], [0, 1], [0, 2]];
 
   return data ? (
     <div id='board' className='center column'>
@@ -13,7 +15,11 @@ function GameBoard(props: BoardProps) {
               {row.map((square, columnIndex) => (
                 <td
                   key={columnIndex}
-                  className='square'
+                  className={
+                    hasSubArray(winners, [rowIndex, columnIndex])
+                      ? 'square winner'
+                      : 'square loser'
+                  }
                   onClick={() =>
                     handlePlayerInput({ row: rowIndex, col: columnIndex })
                   }
