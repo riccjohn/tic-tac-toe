@@ -3,6 +3,7 @@ type BoardProps = {
   handlePlayerInput: (coords: Coords) => void;
   reset: () => void;
   winner?: string;
+  winningCells?: number[][] | undefined;
   getValue: (square: Square) => Square;
 };
 
