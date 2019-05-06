@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-const GameBoard: React.SFC<BoardProps> = props => {
+function GameBoard(props: BoardProps) {
   const { data, handlePlayerInput, reset, winner, getValue } = props;
 
   return data ? (
@@ -32,10 +32,10 @@ const GameBoard: React.SFC<BoardProps> = props => {
   ) : (
     <h1>NO_BOARD</h1>
   );
-};
+}
 
 GameBoard.defaultProps = {
-  getValue: square => square,
+  getValue: (square: Square) => square,
 };
 
 export default GameBoard;
