@@ -77,4 +77,13 @@ describe('Tic-tac-toe', () => {
     game.place(0, 0);
     expect(game.winner).toEqual(undefined);
   });
+
+  it('will detect which cells caused a win', () => {
+    game.place(0, 0); // X
+    game.place(0, 2); // O
+    game.place(1, 1); // X
+    game.place(1, 0); // O
+    game.place(2, 2); // X
+    expect(game.winningCells).toEqual([[0, 0], [1, 1], [2, 2]]);
+  });
 });
