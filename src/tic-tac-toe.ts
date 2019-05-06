@@ -45,19 +45,22 @@ class Game {
   };
 
   private checkRowsForWin(): boolean {
-    const hasWinner = this.board.some(row => row.every(this.isCurrentPlayer));
-
     const winningCells: Vectors = [];
+    let hasWinner: boolean = false;
 
-    if (hasWinner) {
-      this.board.forEach((row, rowIndex) => {
-        if (row.every(value => this.isCurrentPlayer(value))) {
-          for (let i = 0; i < row.length; i++) {
-            winningCells.push([rowIndex, i]);
-          }
+    for (const rowIndex in this.board) {
+      if (this.board[rowIndex].every(cell => this.isCurrentPlayer(cell))) {
+        hasWinner = true;
+        for (
+          let columnIndex = 0;
+          columnIndex < this.board.length;
+          columnIndex++
+        ) {
+          winningCells.push([Number(rowIndex), columnIndex]);
         }
-      });
-      this.winningCells = winningCells;
+        this.winningCells = winningCells;
+        break;
+      }
     }
 
     return hasWinner;
