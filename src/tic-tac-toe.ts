@@ -1,11 +1,13 @@
 class Game {
   public board: Board;
   public winner: PlayerPiece | undefined;
+  public winningCells: number[][] | undefined;
   private currentPlayer: PlayerPiece;
 
   constructor(private boardSize: number = 3) {
     this.currentPlayer = 'X';
     this.board = this.generateBoard();
+    this.winningCells = undefined;
   }
 
   public place(x: number, y: number): void {
@@ -41,7 +43,22 @@ class Game {
   };
 
   private checkRowsForWin(): boolean {
-    return this.board.some(row => row.every(this.isCurrentPlayer));
+    const hasWinner = this.board.some(row => row.every(this.isCurrentPlayer));
+
+    const winningCells: number[][] = [];
+
+    if (hasWinner) {
+      this.board.forEach((row, rowIndex) => {
+        if (row.every(value => this.isCurrentPlayer(value))) {
+          for (let i = 0; i < row.length; i++) {
+            winningCells.push([rowIndex, i]);
+          }
+        }
+      });
+      this.winningCells = winningCells;
+    }
+
+    return hasWinner;
   }
 
   private checkColumnsForWin(): boolean {
@@ -65,7 +82,7 @@ class Game {
     const winCondition = [
       this.checkRowsForWin(),
       this.checkColumnsForWin(),
-      this.checkDiagonalsForWin()
+      this.checkDiagonalsForWin(),
     ];
 
     if (winCondition.some(winnerCheck => winnerCheck)) {
