@@ -22,8 +22,9 @@ const BoardSizeForm: React.SFC<BoardFormProps> = props => {
 };
 
 BoardSizeForm.defaultProps = {
-  onChange: () => {},
   hasError: false,
+  // tslint:disable-next-line:no-empty
+  onChange: () => {},
 };
 
 export default BoardSizeForm;
