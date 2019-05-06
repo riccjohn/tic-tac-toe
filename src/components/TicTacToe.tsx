@@ -72,6 +72,7 @@ class TicTacToe extends React.Component<object, GameState> {
               handlePlayerInput={inputHandler}
               reset={this.resetGame}
               winner={this.game.winner}
+              winningCells={this.game.winningCells}
             />
           ) : (
             <BoardSizeForm
