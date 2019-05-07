@@ -78,12 +78,31 @@ describe('Tic-tac-toe', () => {
     expect(game.winner).toEqual(undefined);
   });
 
-  it('will detect which cells caused a win', () => {
+  it('will detect which cells caused a diagonal win', () => {
     game.place(0, 0); // X
     game.place(0, 2); // O
     game.place(1, 1); // X
     game.place(1, 0); // O
     game.place(2, 2); // X
     expect(game.winningCells).toEqual([[0, 0], [1, 1], [2, 2]]);
+  });
+
+  it('will detect which cells caused a row win', () => {
+    game.place(0, 0); // X
+    game.place(1, 2); // O
+    game.place(0, 1); // X
+    game.place(1, 0); // O
+    game.place(0, 2); // X
+    expect(game.winningCells).toEqual([[0, 0], [0, 1], [0, 2]]);
+  });
+
+  it('will detect which cells caused a column win', () => {
+    game.place(0, 0); // X
+    game.place(0, 2); // O
+    game.place(1, 0); // X
+    game.place(0, 1); // O
+    game.place(2, 0); // X
+    expect(game.winner).toEqual('X');
+    expect(game.winningCells).toEqual([[0, 0], [1, 0], [2, 0]]);
   });
 });
