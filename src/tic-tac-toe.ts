@@ -44,54 +44,59 @@ class Game {
     return square === this.currentPlayer;
   };
 
-  private checkRowsForWin(): boolean {
-    const winningCells: Vectors = [];
-    let hasWinner: boolean = false;
+  private checkRowsForWin(): WinData {
+    const winData: WinData = {
+      hasWinner: false,
+      winningCells: [],
+    };
 
     for (const rowIndex in this.board) {
       if (this.board[rowIndex].every(cell => this.isCurrentPlayer(cell))) {
-        hasWinner = true;
+        winData.hasWinner = true;
         for (
           let columnIndex = 0;
           columnIndex < this.board.length;
           columnIndex++
         ) {
-          winningCells.push([Number(rowIndex), columnIndex]);
+          winData.winningCells.push([Number(rowIndex), columnIndex]);
         }
-        this.winningCells = winningCells;
         break;
       }
     }
 
-    return hasWinner;
+    return winData;
   }
 
-  private checkColumnsForWin(): boolean {
+  private checkColumnsForWin(): WinData {
+    const winData: WinData = {
+      hasWinner: false,
+      winningCells: [],
+    };
+
     const transposedBoard = this.eachIndex().map(i =>
       this.board.map(row => row[i])
     );
 
-    const hasWinner = transposedBoard.some(row =>
+    winData.hasWinner = transposedBoard.some(row =>
       row.every(this.isCurrentPlayer)
     );
 
-    const winningCells: Vectors = [];
-
-    if (hasWinner) {
+    if (winData.hasWinner) {
       transposedBoard.forEach((row, rowIndex) => {
         if (row.every(value => this.isCurrentPlayer(value))) {
+          const vectors = [];
           for (let i = 0; i < row.length; i++) {
-            winningCells.push([rowIndex, i]);
+            vectors.push([rowIndex, i]);
           }
+          winData.winningCells = transposeVectors(vectors);
         }
       });
-      this.winningCells = transposeVectors(winningCells);
     }
 
-    return hasWinner;
+    return winData;
   }
 
-  private checkDiagonalsForWin(): boolean {
+  private checkDiagonalsForWin(): WinData {
     const leftToRightDiagonalWin = this.eachIndex()
       .map(i => this.board[i][i])
       .every(this.isCurrentPlayer);
@@ -100,31 +105,37 @@ class Game {
       .map(i => this.board[i][this.boardSize - 1 - i])
       .every(this.isCurrentPlayer);
 
-    const hasWinner = leftToRightDiagonalWin || rightToLeftDiagonalWin;
+    const winData: WinData = {
+      hasWinner: leftToRightDiagonalWin || rightToLeftDiagonalWin,
+      winningCells: [],
+    };
 
-    let winningCells: Vectors;
-
-    if (hasWinner) {
+    if (winData.hasWinner) {
       if (leftToRightDiagonalWin) {
-        winningCells = this.eachIndex().map(i => [i, i]);
+        winData.winningCells = this.eachIndex().map(i => [i, i]);
       } else {
-        winningCells = this.eachIndex().map(i => [i, this.boardSize - 1 - i]);
+        winData.winningCells = this.eachIndex().map(i => [
+          i,
+          this.boardSize - 1 - i,
+        ]);
       }
-      this.winningCells = winningCells;
     }
 
-    return hasWinner;
+    return winData;
   }
 
   private checkGameForWin(): void {
-    const winCondition = [
+    const winChecks = [
       this.checkRowsForWin(),
       this.checkColumnsForWin(),
       this.checkDiagonalsForWin(),
     ];
 
-    if (winCondition.some(winnerCheck => winnerCheck)) {
-      this.winner = this.currentPlayer;
+    for (const check of winChecks) {
+      if (check.hasWinner) {
+        this.winner = this.currentPlayer;
+        this.winningCells = check.winningCells;
+      }
     }
   }
 }
