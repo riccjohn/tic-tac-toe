@@ -5,6 +5,11 @@ type Board = Row[];
 
 type Vectors = number[][];
 
+type WinData = {
+  hasWinner: boolean;
+  winningCells: Vectors;
+};
+
 type Coords = {
   row: number;
   col: number;
