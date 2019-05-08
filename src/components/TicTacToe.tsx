@@ -60,8 +60,9 @@ class TicTacToe extends React.Component<object, GameState> {
 
   public render() {
     const { board } = this.state;
-    // tslint:disable-next-line:no-empty
-    const inputHandler = this.game.winner ? () => {} : this.handlePlayerInput;
+    const inputHandler = this.game.winningVector.length
+      ? () => {}
+      : this.handlePlayerInput;
     return (
       <div className='container center'>
         <div className='center-container center column'>
@@ -72,7 +73,7 @@ class TicTacToe extends React.Component<object, GameState> {
               handlePlayerInput={inputHandler}
               reset={this.resetGame}
               winner={this.game.winner}
-              winningCells={this.game.winningCells}
+              winningVector={this.game.winningVector}
             />
           ) : (
             <BoardSizeForm

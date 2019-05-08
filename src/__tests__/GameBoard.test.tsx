@@ -92,7 +92,11 @@ describe('GameBoard component', () => {
         data={boardArray}
         handlePlayerInput={jest.fn()}
         reset={jest.fn()}
-        winningCells={[[0, 0], [0, 1], [0, 2]]}
+        winningVector={[
+          { row: 0, col: 0 },
+          { row: 0, col: 1 },
+          { row: 0, col: 2 },
+        ]}
       />
     );
     expect(wrapper.find('.winner')).toHaveLength(3);

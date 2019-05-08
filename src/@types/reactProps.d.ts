@@ -2,8 +2,8 @@ type BoardProps = {
   data: Board;
   handlePlayerInput: (coords: Coords) => void;
   reset: () => void;
-  winner?: string;
-  winningCells?: number[][] | undefined;
+  winner?: PlayerPiece | undefined;
+  winningVector?: WinningVector;
   getValue: (square: Square) => Square;
 };
 

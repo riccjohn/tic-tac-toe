@@ -1,14 +1,14 @@
 import * as React from 'react';
-import { hasSubArray } from '../helperFunctions/hasSubArray';
+import { containsCoordinates } from '../helperFunctions/contains';
 
 function GameBoard(props: BoardProps) {
   const {
     data,
     handlePlayerInput,
     reset,
-    winner,
     getValue,
-    winningCells,
+    winningVector,
+    winner,
   } = props;
 
   return (
@@ -22,7 +22,10 @@ function GameBoard(props: BoardProps) {
                 <td
                   key={columnIndex}
                   className={
-                    hasSubArray(winningCells, [rowIndex, columnIndex])
+                    containsCoordinates(winningVector, {
+                      col: columnIndex,
+                      row: rowIndex,
+                    })
                       ? 'square winner'
                       : 'square'
                   }
