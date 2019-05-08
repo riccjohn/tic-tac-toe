@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { Button } from './atoms/Button';
+import { Square, Table } from './atoms/TableElements';
 
 const GameBoard: React.SFC<BoardProps> = props => {
   const { data, handlePlayerInput, reset, winner } = props;
@@ -6,12 +8,12 @@ const GameBoard: React.SFC<BoardProps> = props => {
   return data ? (
     <div id='board' className='center column'>
       {winner && <h1>{`Winner is ${winner}`}</h1>}
-      <table id='game-table'>
+      <Table id='game-table'>
         <tbody>
           {data.map((row, rowIndex) => (
             <tr key={rowIndex} className='row'>
               {row.map((square, columnIndex) => (
-                <td
+                <Square
                   key={columnIndex}
                   className='square'
                   onClick={() =>
@@ -19,15 +21,15 @@ const GameBoard: React.SFC<BoardProps> = props => {
                   }
                 >
                   {square || '•'}
-                </td>
+                </Square>
               ))}
             </tr>
           ))}
         </tbody>
-      </table>
-      <button className='reset' onClick={reset}>
+      </Table>
+      <Button className='reset' onClick={reset}>
         Reset
-      </button>
+      </Button>
     </div>
   ) : (
     <h1>NO_BOARD</h1>
