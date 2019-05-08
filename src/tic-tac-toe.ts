@@ -107,8 +107,9 @@ class Game {
       this.checkDiagonalsForWin(),
     ];
 
-    if (winVectors.some(vector => !!vector)) {
-      this.winningVector = winVectors.find(vector => !!vector) || [];
+    const maybeWinningVector = winVectors.find(vector => !!vector);
+    if (maybeWinningVector) {
+      this.winningVector = maybeWinningVector;
       this.winner = this.currentPlayer;
     }
   }
