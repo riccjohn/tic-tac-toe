@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import GameBoard from '../components/GameBoard';
+import { Table } from '../components/atoms/TableElements';
 import { createBoard } from '../helperFunctions/boardCreation';
 
 describe('GameBoard component', () => {
@@ -13,7 +14,7 @@ describe('GameBoard component', () => {
         reset={jest.fn()}
       />
     );
-    expect(wrapper.find('table#game-table').exists()).toBe(true);
+    expect(wrapper.find('#game-table').exists()).toBe(true);
   });
 
   it('should render 25 squares given a 5x5 array', () => {
@@ -78,10 +79,7 @@ describe('GameBoard component', () => {
       />
     );
     expect(mockFn.mock.calls).toHaveLength(0);
-    wrapper
-      .find('button')
-      .at(0)
-      .simulate('click');
+    wrapper.find('.reset').simulate('click');
     expect(mockFn.mock.calls).toHaveLength(1);
   });
 });
