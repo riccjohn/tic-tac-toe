@@ -58,30 +58,38 @@ class TicTacToe extends React.Component<object, GameState> {
     });
   };
 
-  public render() {
-    const { board } = this.state;
+  private currentView(board: Board | undefined) {
     const inputHandler = this.game.winningVector.length
       ? () => {}
       : this.handlePlayerInput;
+    if (board) {
+      return (
+        <GameBoard
+          data={board}
+          handlePlayerInput={inputHandler}
+          reset={this.resetGame}
+          winner={this.game.winner}
+          winningVector={this.game.winningVector}
+        />
+      );
+    } else {
+      return (
+        <BoardSizeForm
+          onChange={this.onChange}
+          onSubmit={this.submitBoardSize}
+          hasError={this.state.hasError}
+        />
+      );
+    }
+  }
+
+  public render() {
+    const { board } = this.state;
     return (
       <div className='container center'>
         <div className='center-container center column'>
           <h1>Tic Tac Toe</h1>
-          {board ? (
-            <GameBoard
-              data={board}
-              handlePlayerInput={inputHandler}
-              reset={this.resetGame}
-              winner={this.game.winner}
-              winningVector={this.game.winningVector}
-            />
-          ) : (
-            <BoardSizeForm
-              onChange={this.onChange}
-              onSubmit={this.submitBoardSize}
-              hasError={this.state.hasError}
-            />
-          )}
+          {this.currentView(board)}
         </div>
       </div>
     );
