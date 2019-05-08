@@ -86,8 +86,10 @@ class Game {
     const winningVector: WinningVector = [];
 
     for (let i = 0; i < this.boardSize; i++) {
+      // check values from top left to bottom right (ie for 3x3 grid => [0, 0], [1, 1], [2, 2])
       if (this.isCurrentPlayer(this.board[i][i])) {
         winningVector.push({ row: i, col: i });
+        // check values from top right to bottom left (ie for 3x3 grid => [0, 2], [1, 1], [2, 0])
       } else if (this.isCurrentPlayer(this.board[i][this.boardSize - 1 - i])) {
         winningVector.push({ row: i, col: this.boardSize - 1 - i });
       }
