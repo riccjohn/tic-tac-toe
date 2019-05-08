@@ -1,8 +1,8 @@
 export const containsCoordinates = (
-  master: WinningVector | undefined = [],
-  sub: Coords
+  master: WinningVector = [],
+  coords: Coords
 ): boolean => {
   return master.some(el => {
-    return el.row === sub.row && el.col === sub.col;
+    return el.row === coords.row && el.col === coords.col;
   });
 };
