@@ -83,26 +83,18 @@ class Game {
   }
 
   private checkDiagonalsForWin(): WinningVector | undefined {
-    const leftToRightDiagonalWin = this.eachIndex()
-      .map(i => this.board[i][i])
-      .every(this.isCurrentPlayer);
+    const winningVector: WinningVector = [];
 
-    if (leftToRightDiagonalWin) {
-      return this.eachIndex().map(i => {
-        return { row: i, col: i };
-      });
+    for (let i = 0; i < this.boardSize; i++) {
+      if (this.isCurrentPlayer(this.board[i][i])) {
+        winningVector.push({ row: i, col: i });
+      } else if (this.isCurrentPlayer(this.board[i][this.boardSize - 1 - i])) {
+        winningVector.push({ row: i, col: this.boardSize - 1 - i });
+      }
+      if (winningVector.length === this.boardSize) {
+        return winningVector;
+      }
     }
-
-    const rightToLeftDiagonalWin = this.eachIndex()
-      .map(i => this.board[i][this.boardSize - 1 - i])
-      .every(this.isCurrentPlayer);
-
-    if (rightToLeftDiagonalWin) {
-      return this.eachIndex().map(i => {
-        return { row: i, col: this.boardSize - 1 - i };
-      });
-    }
-
     return;
   }
 
