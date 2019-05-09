@@ -73,9 +73,23 @@ describe('Tic-tac-toe', () => {
     expect(game.winner).toEqual('X');
   });
 
+  it('will use default values until a win is detected', () => {
+    game.place(0, 0);
+    expect(game.winner).toBe(undefined);
+    expect(game.winningVector).toEqual([]);
+  });
+
   it('will not detect a winner until a win condition is met', () => {
     game.place(0, 0);
-    expect(game.winner).toEqual(undefined);
+    game.place(0, 2);
+    game.place(1, 1);
+    game.place(0, 1);
+    game.place(2, 0);
+    expect(game.winner).toBe(undefined);
+    expect(game.winningVector).toEqual([]);
+    game.place(2, 1);
+    game.place(2, 2);
+    expect(game.winner).toBe('X');
   });
 
   it('will detect which cells caused a diagonal win', () => {
