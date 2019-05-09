@@ -83,21 +83,18 @@ class Game {
   }
 
   private checkDiagonalsForWin(): WinningVector | undefined {
-    const winningVector: WinningVector = [];
-
-    for (let i = 0; i < this.boardSize; i++) {
+    const diagonals: WinningVector[] = [
       // check values from top left to bottom right (ie for 3x3 grid => [0, 0], [1, 1], [2, 2])
-      if (this.isCurrentPlayer(this.board[i][i])) {
-        winningVector.push({ row: i, col: i });
-        // check values from top right to bottom left (ie for 3x3 grid => [0, 2], [1, 1], [2, 0])
-      } else if (this.isCurrentPlayer(this.board[i][this.boardSize - 1 - i])) {
-        winningVector.push({ row: i, col: this.boardSize - 1 - i });
-      }
-      if (winningVector.length === this.boardSize) {
-        return winningVector;
-      }
-    }
-    return;
+      this.eachIndex().map(i => ({ row: i, col: i })),
+      // check values from top right to bottom left (ie for 3x3 grid => [0, 2], [1, 1], [2, 0])
+      this.eachIndex().map(i => ({ row: i, col: this.boardSize - 1 - i })),
+    ];
+
+    return diagonals.find(diagonal => {
+      return diagonal.every(square =>
+        this.isCurrentPlayer(this.board[square.row][square.col])
+      );
+    });
   }
 
   private checkGameForWin(): void {
@@ -107,9 +104,9 @@ class Game {
       this.checkDiagonalsForWin(),
     ];
 
-    const maybeWinningVector = winVectors.find(vector => !!vector);
-    if (maybeWinningVector) {
-      this.winningVector = maybeWinningVector;
+    this.winningVector = winVectors.find(vector => !!vector) || [];
+
+    if (this.winningVector.length >= this.boardSize) {
       this.winner = this.currentPlayer;
     }
   }
