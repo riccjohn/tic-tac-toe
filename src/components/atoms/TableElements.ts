@@ -21,9 +21,13 @@ export const Square = styled.td`
     `}
 `;
 
+Square.displayName = 'square';
+
 export const Table = styled.table`
   border-collapse: collapse;
   align-self: center;
   max-width: 400px;
   min-width: 250px;
 `;
+
+Table.displayName = 'styledTable';

@@ -21,3 +21,5 @@ export const Input = styled.input`
       border: none;
     `}
 `;
+
+Input.displayName = 'styledInput';

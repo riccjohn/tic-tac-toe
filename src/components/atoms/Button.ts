@@ -10,3 +10,5 @@ export const Button = styled.button`
   border: none;
   border-radius: 5px;
 `;
+
+Button.displayName = 'Button';
