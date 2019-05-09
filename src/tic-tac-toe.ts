@@ -44,10 +44,10 @@ class Game {
   };
 
   private checkRowsForWin(): WinningVector | undefined {
-    for (let rowIndex = 0; rowIndex < this.board.length; rowIndex++) {
+    for (let rowIndex = 0; rowIndex < this.boardSize; rowIndex++) {
       const row = this.board[rowIndex];
       const vector: WinningVector = [];
-      for (let colIndex = 0; colIndex < this.board.length; colIndex++) {
+      for (let colIndex = 0; colIndex < this.boardSize; colIndex++) {
         const square = row[colIndex];
         if (this.isCurrentPlayer(square)) {
           vector.push({ row: rowIndex, col: colIndex });
@@ -65,11 +65,11 @@ class Game {
       this.board.map(row => row[i])
     );
 
-    for (let colIndex = 0; colIndex < transposedBoard.length; colIndex++) {
+    for (let colIndex = 0; colIndex < this.boardSize; colIndex++) {
       const column = transposedBoard[colIndex];
       const vector: WinningVector = [];
 
-      for (let rowIndex = 0; rowIndex < transposedBoard.length; rowIndex++) {
+      for (let rowIndex = 0; rowIndex < this.boardSize; rowIndex++) {
         const square = column[rowIndex];
         if (this.isCurrentPlayer(square)) {
           vector.push({ row: rowIndex, col: colIndex });
