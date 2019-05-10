@@ -2,6 +2,10 @@ import * as React from 'react';
 import Game from '../tic-tac-toe';
 import GameBoard from './GameBoard';
 import BoardSizeForm from './BoardSizeForm';
+import Layout from './Layout';
+import theme from './Theme';
+import { Title } from './atoms/Title';
+import { ThemeProvider } from 'styled-components';
 
 class TicTacToe extends React.Component<object, GameState> {
   private game: Game = new Game();
@@ -62,25 +66,23 @@ class TicTacToe extends React.Component<object, GameState> {
     const { board } = this.state;
     const inputHandler = this.game.winner ? () => {} : this.handlePlayerInput;
     return (
-      <div className='container center'>
-        <div className='center-container center column'>
-          <h1>Tic Tac Toe</h1>
-          {!board ? (
-            <BoardSizeForm
-              onChange={this.onChange}
-              onSubmit={this.submitBoardSize}
-              hasError={this.state.hasError}
-            />
-          ) : (
-            <GameBoard
-              data={board}
-              handlePlayerInput={inputHandler}
-              reset={this.resetGame}
-              winner={this.game.winner}
-            />
-          )}
-        </div>
-      </div>
+      <Layout>
+        <Title>Tic Tac Toe</Title>
+        {!board ? (
+          <BoardSizeForm
+            onChange={this.onChange}
+            onSubmit={this.submitBoardSize}
+            hasError={this.state.hasError}
+          />
+        ) : (
+          <GameBoard
+            data={board}
+            handlePlayerInput={inputHandler}
+            reset={this.resetGame}
+            winner={this.game.winner}
+          />
+        )}
+      </Layout>
     );
   }
 }

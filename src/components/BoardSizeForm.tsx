@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { Input } from './atoms/StyledInput';
 import Error from './Error';
+import { ThemeProvider } from 'styled-components';
+import theme from './Theme';
 
 const BoardSizeForm: React.SFC<BoardFormProps> = props => {
   const { onChange, onSubmit, hasError } = props;
@@ -9,7 +11,6 @@ const BoardSizeForm: React.SFC<BoardFormProps> = props => {
     <React.Fragment>
       <p>What size should the board be?</p>
       <form className='size-form' onSubmit={onSubmit}>
-        Board Size:
         <Input
           placeholder='board size'
           onChange={onChange}

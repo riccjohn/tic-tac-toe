@@ -1,13 +1,17 @@
 import * as React from 'react';
 import { Button } from './atoms/Button';
 import { Square, Table } from './atoms/TableElements';
+import { ThemeProvider } from 'styled-components';
+import { ContentContainer } from './atoms/LayoutContainers';
+import { Title } from './atoms/Title';
+import theme from './Theme';
 
 const GameBoard: React.SFC<BoardProps> = props => {
   const { data, handlePlayerInput, reset, winner } = props;
 
   return data ? (
-    <div id='board' className='center column'>
-      {winner && <h1>{`Winner is ${winner}`}</h1>}
+    <ContentContainer>
+      {winner && <Title>{`Winner is ${winner}`}</Title>}
       <Table id='game-table'>
         <tbody>
           {data.map((row, rowIndex) => (
@@ -30,7 +34,7 @@ const GameBoard: React.SFC<BoardProps> = props => {
       <Button className='reset' onClick={reset}>
         Reset
       </Button>
-    </div>
+    </ContentContainer>
   ) : (
     <h1>NO_BOARD</h1>
   );
