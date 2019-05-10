@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { shallow, mount } from 'enzyme';
 import TicTacToe from '../components/TicTacToe';
+import { Title } from '../components/atoms/Title';
 import { fill } from '../helperFunctions/testUtils';
 
 describe('TicTacToe component', () => {
   it('should render title', () => {
     const wrapper = shallow(<TicTacToe />);
-    expect(wrapper.contains(<h1>Tic Tac Toe</h1>)).toEqual(true);
+    expect(wrapper.find('Title')).toHaveLength(1);
   });
 
   it('should render the BoardSizeForm component by default', () => {
@@ -97,7 +98,7 @@ describe('TicTacToe component', () => {
       .at(2)
       .simulate('click');
 
-    expect(wrapper.contains(<h1>Winner is O</h1>)).toBeFalsy();
-    expect(wrapper.contains(<h1>Winner is X</h1>)).toBeTruthy();
+    expect(wrapper.contains(<Title>Winner is O</Title>)).toBeFalsy();
+    expect(wrapper.contains(<Title>Winner is X</Title>)).toBeTruthy();
   });
 });
