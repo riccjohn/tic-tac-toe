@@ -3,7 +3,7 @@ import Game from '../tic-tac-toe';
 import GameBoard from './GameBoard';
 import BoardSizeForm from './BoardSizeForm';
 import Layout from './Layout';
-import { Title } from './atoms/Title';
+import Title from './atoms/Title';
 
 class TicTacToe extends React.Component<object, GameState> {
   private game: Game = new Game();

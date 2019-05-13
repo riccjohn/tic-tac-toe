@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { shallow, mount } from 'enzyme';
 import TicTacToe from '../components/TicTacToe';
-import { Title } from '../components/atoms/Title';
+import Title from '../components/atoms/Title';
 import { fill } from '../helperFunctions/testUtils';
 
 describe('TicTacToe component', () => {

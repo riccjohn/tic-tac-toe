@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import GameBoard from '../components/GameBoard';
-import { Table } from '../components/atoms/TableElements';
-import { Button } from '../components/atoms/Button';
+import Table from '../components/atoms/Table';
+import Button from '../components/atoms/Button';
 import { createBoard } from '../helperFunctions/boardCreation';
 
 describe('GameBoard component', () => {

@@ -4,7 +4,7 @@ type ButtonProps = {
   theme: any;
 };
 
-export const Button = styled.button<ButtonProps>`
+const Button = styled.button<ButtonProps>`
   box-sizing: border-box;
   padding: 0.75em 1.25em;
   margin: 0.5em;
@@ -21,3 +21,5 @@ export const Button = styled.button<ButtonProps>`
 `;
 
 Button.displayName = 'Button';
+
+export default Button;

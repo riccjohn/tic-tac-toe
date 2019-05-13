@@ -5,7 +5,7 @@ type SquareProps = {
   theme: any;
 };
 
-export const Square = styled.td`
+const Square = styled.td`
   padding: 2rem;
   font-size: 2rem;
   font-weight: bold;
@@ -27,12 +27,4 @@ export const Square = styled.td`
 
 Square.displayName = 'square';
 
-export const Table = styled.table`
-  border-collapse: collapse;
-  align-self: center;
-  max-width: 400px;
-  min-width: 250px;
-  margin-bottom: 1rem;
-`;
-
-Table.displayName = 'styledTable';
+export default Square;

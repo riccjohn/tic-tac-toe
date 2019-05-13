@@ -5,7 +5,7 @@ type InputProps = {
   theme: any;
 };
 
-export const Input = styled.input<InputProps>`
+const Input = styled.input<InputProps>`
   box-sizing: border-box;
   padding: 0.75em;
   margin: 0.5em;
@@ -25,3 +25,5 @@ export const Input = styled.input<InputProps>`
 `;
 
 Input.displayName = 'styledInput';
+
+export default Input;

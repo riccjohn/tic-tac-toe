@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { Button } from './atoms/Button';
-import { Square, Table } from './atoms/TableElements';
-import { ContentContainer } from './atoms/LayoutContainers';
-import { Title } from './atoms/Title';
+import Button from './atoms/Button';
+import Square from './atoms/Square';
+import Table from './atoms/Table';
+import ContentContainer from './atoms/ContentContainer';
+import Title from './atoms/Title';
 
 const GameBoard: React.SFC<BoardProps> = props => {
   const { data, handlePlayerInput, reset, winner } = props;
