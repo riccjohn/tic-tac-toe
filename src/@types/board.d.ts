@@ -7,3 +7,5 @@ type Coords = {
   row: number;
   col: number;
 };
+
+type WinningVector = Coords[];

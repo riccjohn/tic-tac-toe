@@ -73,8 +73,62 @@ describe('Tic-tac-toe', () => {
     expect(game.winner).toEqual('X');
   });
 
+  it('will use default values until a win is detected', () => {
+    game.place(0, 0);
+    expect(game.winner).toBe(undefined);
+    expect(game.winningVector).toEqual([]);
+  });
+
   it('will not detect a winner until a win condition is met', () => {
     game.place(0, 0);
-    expect(game.winner).toEqual(undefined);
+    game.place(0, 2);
+    game.place(1, 1);
+    game.place(0, 1);
+    game.place(2, 0);
+    expect(game.winner).toBe(undefined);
+    expect(game.winningVector).toEqual([]);
+    game.place(2, 1);
+    game.place(2, 2);
+    expect(game.winner).toBe('X');
+  });
+
+  it('will detect which cells caused a diagonal win', () => {
+    game.place(0, 0); // X
+    game.place(0, 2); // O
+    game.place(1, 1); // X
+    game.place(1, 0); // O
+    game.place(2, 2); // X
+    expect(game.winningVector).toEqual([
+      { row: 0, col: 0 },
+      { row: 1, col: 1 },
+      { row: 2, col: 2 },
+    ]);
+  });
+
+  it('will detect which cells caused a row win', () => {
+    game.place(0, 0); // X
+    game.place(1, 2); // O
+    game.place(0, 1); // X
+    game.place(1, 0); // O
+    game.place(0, 2); // X
+    expect(game.winningVector).toEqual([
+      { row: 0, col: 0 },
+      { row: 0, col: 1 },
+      { row: 0, col: 2 },
+    ]);
+  });
+
+  it('will detect which cells caused a column win', () => {
+    game.place(0, 0); // X
+    game.place(0, 2); // O
+    game.place(1, 0); // X
+    game.place(0, 1); // O
+    game.place(2, 0); // X
+    expect(game.winner).toEqual('X');
+    expect(game.winningVector).toEqual([
+      { row: 0, col: 0 },
+      { row: 1, col: 0 },
+      { row: 2, col: 0 },
+    ]);
   });
 });

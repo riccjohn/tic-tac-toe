@@ -1,11 +1,14 @@
 class Game {
   public board: Board;
-  public winner: PlayerPiece | undefined;
+  public winningVector: WinningVector;
   private currentPlayer: PlayerPiece;
+  public winner: PlayerPiece | undefined;
 
   constructor(private boardSize: number = 3) {
     this.currentPlayer = 'X';
     this.board = this.generateBoard();
+    this.winner = undefined;
+    this.winningVector = [];
   }
 
   public place(x: number, y: number): void {
@@ -40,35 +43,78 @@ class Game {
     return square === this.currentPlayer;
   };
 
-  private checkRowsForWin(): boolean {
-    return this.board.some(row => row.every(this.isCurrentPlayer));
+  private checkRowsForWin(): WinningVector | undefined {
+    for (let rowIndex = 0; rowIndex < this.boardSize; rowIndex++) {
+      const row = this.board[rowIndex];
+      const vector: WinningVector = [];
+      for (let colIndex = 0; colIndex < this.boardSize; colIndex++) {
+        const square = row[colIndex];
+        if (this.isCurrentPlayer(square)) {
+          vector.push({ row: rowIndex, col: colIndex });
+        }
+      }
+      if (vector.length === this.boardSize) {
+        return vector;
+      }
+    }
+    return;
   }
 
-  private checkColumnsForWin(): boolean {
+  private checkColumnsForWin(): WinningVector | undefined {
     const transposedBoard = this.eachIndex().map(i =>
       this.board.map(row => row[i])
     );
 
-    return transposedBoard.some(row => row.every(this.isCurrentPlayer));
+    for (let colIndex = 0; colIndex < this.boardSize; colIndex++) {
+      const column = transposedBoard[colIndex];
+      const vector: WinningVector = [];
+
+      for (let rowIndex = 0; rowIndex < this.boardSize; rowIndex++) {
+        const square = column[rowIndex];
+        if (this.isCurrentPlayer(square)) {
+          vector.push({ row: rowIndex, col: colIndex });
+        }
+      }
+      if (vector.length === this.boardSize) {
+        return vector;
+      }
+    }
+    return;
   }
 
-  private checkDiagonalsForWin(): boolean {
-    const diagonals = [
-      this.eachIndex().map(i => this.board[i][i]),
-      this.eachIndex().map(i => this.board[i][this.boardSize - 1 - i]),
+  private checkDiagonalsForWin(): WinningVector | undefined {
+    const topLeftToBottomRight = this.eachIndex().map(i => ({
+      col: i,
+      row: i,
+    }));
+
+    const topRightToBottomLeft = this.eachIndex().map(i => ({
+      col: this.boardSize - 1 - i,
+      row: i,
+    }));
+
+    const diagonals: WinningVector[] = [
+      topLeftToBottomRight,
+      topRightToBottomLeft,
     ];
 
-    return diagonals.some(values => values.every(this.isCurrentPlayer));
+    return diagonals.find(diagonal => {
+      return diagonal.every(square =>
+        this.isCurrentPlayer(this.board[square.row][square.col])
+      );
+    });
   }
 
   private checkGameForWin(): void {
-    const winCondition = [
+    const winVectors = [
       this.checkRowsForWin(),
       this.checkColumnsForWin(),
-      this.checkDiagonalsForWin()
+      this.checkDiagonalsForWin(),
     ];
 
-    if (winCondition.some(winnerCheck => winnerCheck)) {
+    this.winningVector = winVectors.find(vector => !!vector) || [];
+
+    if (this.winningVector.length >= this.boardSize) {
       this.winner = this.currentPlayer;
     }
   }

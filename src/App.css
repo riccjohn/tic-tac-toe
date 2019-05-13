@@ -55,3 +55,7 @@ td {
 td:hover {
   background-color: tomato;
 }
+
+.winner {
+  background-color: turquoise;
+}

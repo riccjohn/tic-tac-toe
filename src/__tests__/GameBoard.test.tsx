@@ -84,4 +84,21 @@ describe('GameBoard component', () => {
       .simulate('click');
     expect(mockFn.mock.calls).toHaveLength(1);
   });
+
+  it('should add a winner class to cells that are part of a win', () => {
+    const boardArray = createBoard(3, undefined);
+    const wrapper = shallow(
+      <GameBoard
+        data={boardArray}
+        handlePlayerInput={jest.fn()}
+        reset={jest.fn()}
+        winningVector={[
+          { row: 0, col: 0 },
+          { row: 0, col: 1 },
+          { row: 0, col: 2 },
+        ]}
+      />
+    );
+    expect(wrapper.find('.winner')).toHaveLength(3);
+  });
 });

@@ -1,9 +1,17 @@
 import * as React from 'react';
+import { containsCoordinates } from '../helperFunctions/contains';
 
-const GameBoard: React.SFC<BoardProps> = props => {
-  const { data, handlePlayerInput, reset, winner } = props;
+function GameBoard(props: BoardProps) {
+  const {
+    data,
+    handlePlayerInput,
+    reset,
+    getValue,
+    winningVector,
+    winner,
+  } = props;
 
-  return data ? (
+  return (
     <div id='board' className='center column'>
       {winner && <h1>{`Winner is ${winner}`}</h1>}
       <table id='game-table'>
@@ -13,12 +21,19 @@ const GameBoard: React.SFC<BoardProps> = props => {
               {row.map((square, columnIndex) => (
                 <td
                   key={columnIndex}
-                  className='square'
+                  className={
+                    containsCoordinates(winningVector, {
+                      col: columnIndex,
+                      row: rowIndex,
+                    })
+                      ? 'square winner'
+                      : 'square'
+                  }
                   onClick={() =>
                     handlePlayerInput({ row: rowIndex, col: columnIndex })
                   }
                 >
-                  {square || '•'}
+                  {getValue(square)}
                 </td>
               ))}
             </tr>
@@ -29,9 +44,11 @@ const GameBoard: React.SFC<BoardProps> = props => {
         Reset
       </button>
     </div>
-  ) : (
-    <h1>NO_BOARD</h1>
   );
+}
+
+GameBoard.defaultProps = {
+  getValue: (square: Square) => square,
 };
 
 export default GameBoard;
