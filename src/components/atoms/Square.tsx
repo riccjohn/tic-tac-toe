@@ -25,6 +25,6 @@ const Square = styled.td`
     `}
 `;
 
-Square.displayName = 'square';
+Square.displayName = 'Square';
 
 export default Square;

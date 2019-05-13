@@ -24,6 +24,6 @@ const Input = styled.input<InputProps>`
     `}
 `;
 
-Input.displayName = 'styledInput';
+Input.displayName = 'StyledInput';
 
 export default Input;

@@ -8,6 +8,6 @@ const Table = styled.table`
   margin-bottom: 1rem;
 `;
 
-Table.displayName = 'styledTable';
+Table.displayName = 'StyledTable';
 
 export default Table;
