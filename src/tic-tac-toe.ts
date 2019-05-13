@@ -83,11 +83,19 @@ class Game {
   }
 
   private checkDiagonalsForWin(): WinningVector | undefined {
+    const topLeftToBottomRight = this.eachIndex().map(i => ({
+      col: i,
+      row: i,
+    }));
+
+    const topRightToBottomLeft = this.eachIndex().map(i => ({
+      col: this.boardSize - 1 - i,
+      row: i,
+    }));
+
     const diagonals: WinningVector[] = [
-      // check values from top left to bottom right (ie for 3x3 grid => [0, 0], [1, 1], [2, 2])
-      this.eachIndex().map(i => ({ row: i, col: i })),
-      // check values from top right to bottom left (ie for 3x3 grid => [0, 2], [1, 1], [2, 0])
-      this.eachIndex().map(i => ({ row: i, col: this.boardSize - 1 - i })),
+      topLeftToBottomRight,
+      topRightToBottomLeft,
     ];
 
     return diagonals.find(diagonal => {
