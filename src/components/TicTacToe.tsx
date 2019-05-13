@@ -3,9 +3,7 @@ import Game from '../tic-tac-toe';
 import GameBoard from './GameBoard';
 import BoardSizeForm from './BoardSizeForm';
 import Layout from './Layout';
-import theme from './Theme';
 import { Title } from './atoms/Title';
-import { ThemeProvider } from 'styled-components';
 
 class TicTacToe extends React.Component<object, GameState> {
   private game: Game = new Game();
