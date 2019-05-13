@@ -18,8 +18,8 @@ const Input = styled.input<InputProps>`
   ${(props: InputProps) =>
     props.type === 'submit' &&
     css`
-      background: ${inputProps => inputProps.theme.primary};
-      color: ${inputProps => inputProps.theme.lightText};
+      background: ${props.theme.primary};
+      color: ${props.theme.lightText};
       border: none;
     `}
 `;

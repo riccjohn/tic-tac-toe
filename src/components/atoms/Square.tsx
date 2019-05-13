@@ -21,7 +21,7 @@ const Square = styled.td`
   ${(props: SquareProps) =>
     props.winner &&
     css`
-      background: ${squareProps => squareProps.theme.secondary};
+      background: ${props.theme.secondary};
     `}
 `;
 
