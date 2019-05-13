@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 type InputProps = {
-  submit?: boolean;
+  type?: string;
   theme: Theme;
 };
 
@@ -13,12 +13,12 @@ const Input = styled.input<InputProps>`
   color: ${props => props.theme.darkAccent};
   background: ${props => props.theme.lightText};
   border-radius: 5px;
+  font-size: 1.1em;
 
   ${(props: InputProps) =>
-    props.submit &&
+    props.type === 'submit' &&
     css`
       background: ${inputProps => inputProps.theme.primary};
-      font-size: 1.2em;
       color: ${inputProps => inputProps.theme.lightText};
       border: none;
     `}

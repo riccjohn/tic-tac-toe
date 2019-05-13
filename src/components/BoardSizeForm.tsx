@@ -16,7 +16,7 @@ const BoardSizeForm: React.SFC<BoardFormProps> = props => {
           name='size'
           aria-label='board size input'
         />
-        <Input submit className='size-submit' type='submit' value='submit' />
+        <Input className='size-submit' type='submit' value='submit' />
       </form>
       {hasError && <Error />}
     </React.Fragment>
