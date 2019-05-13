@@ -2,7 +2,7 @@ module.exports = {
   clearMocks: true,
   coverageDirectory: "coverage",
   testEnvironment: "jsdom",
-  testMatch: ["**/__tests__/*\.(test|spec)\.(js|ts|tsx)"],
+  testMatch: ["<rootDir>/src/__tests__/*\.(test|spec)\.(js|ts|tsx)"],
   moduleFileExtensions: [
     "ts",
     "tsx",
