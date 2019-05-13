@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 
 type SquareProps = {
   winner?: boolean;
-  theme: any;
+  theme: Theme;
 };
 
 const Square = styled.td`

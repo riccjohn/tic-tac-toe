@@ -1,4 +1,4 @@
-const theme = {
+const theme: Theme = {
   active: '#42f4d4',
   darkAccent: '#3a3a3a',
   lightText: '#ffffff',

@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 type ButtonProps = {
-  theme: any;
+  theme: Theme;
 };
 
 const Button = styled.button<ButtonProps>`

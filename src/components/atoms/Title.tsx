@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 type TitleProps = {
-  theme: any;
+  theme: Theme;
 };
 
 const Title = styled.h1<TitleProps>`

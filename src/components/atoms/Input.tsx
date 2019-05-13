@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 
 type InputProps = {
   submit?: boolean;
-  theme: any;
+  theme: Theme;
 };
 
 const Input = styled.input<InputProps>`
