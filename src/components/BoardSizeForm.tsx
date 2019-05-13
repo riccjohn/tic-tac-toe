@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Input } from './atoms/StyledInput';
+import { Input } from './atoms/Input';
 import Error from './Error';
 
 const BoardSizeForm: React.SFC<BoardFormProps> = props => {
