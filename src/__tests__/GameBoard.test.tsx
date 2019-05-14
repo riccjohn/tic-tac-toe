@@ -3,6 +3,7 @@ import { shallow } from 'enzyme';
 import GameBoard from '../components/GameBoard';
 import Table from '../components/atoms/Table';
 import Button from '../components/atoms/Button';
+import BoardSquare from '../components/atoms/BoardSquare';
 import { createBoard } from '../helperFunctions/boardCreation';
 
 describe('GameBoard component', () => {
@@ -84,7 +85,7 @@ describe('GameBoard component', () => {
     expect(mockFn.mock.calls).toHaveLength(1);
   });
 
-  it('should add a winner class to cells that are part of a win', () => {
+  it('should add a "winner" prop to cells that are part of a win', () => {
     const boardArray = createBoard(3, undefined);
     const wrapper = shallow(
       <GameBoard
@@ -98,6 +99,15 @@ describe('GameBoard component', () => {
         ]}
       />
     );
-    expect(wrapper.find('.winner')).toHaveLength(3);
+
+    const propsArray = boardArray.map(
+      (el: any, idx: number) =>
+        wrapper
+          .find(BoardSquare)
+          .at(idx)
+          .props().winner
+    );
+
+    expect(propsArray.every(val => val === true)).toBeTruthy();
   });
 });
