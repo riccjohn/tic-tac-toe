@@ -4,9 +4,17 @@ import Square from './atoms/Square';
 import Table from './atoms/Table';
 import ContentContainer from './atoms/ContentContainer';
 import Title from './atoms/Title';
+import { containsCoordinates } from '../helperFunctions/contains';
 
-const GameBoard: React.SFC<BoardProps> = props => {
-  const { data, handlePlayerInput, reset, winner } = props;
+function GameBoard(props: BoardProps) {
+  const {
+    data,
+    handlePlayerInput,
+    reset,
+    getValue,
+    winningVector,
+    winner,
+  } = props;
 
   return data ? (
     <ContentContainer>
@@ -17,13 +25,17 @@ const GameBoard: React.SFC<BoardProps> = props => {
             <tr key={rowIndex} className='row'>
               {row.map((square, columnIndex) => (
                 <Square
+                  winner={containsCoordinates(winningVector, {
+                    col: columnIndex,
+                    row: rowIndex,
+                  })}
                   key={columnIndex}
                   className='square'
                   onClick={() =>
                     handlePlayerInput({ row: rowIndex, col: columnIndex })
                   }
                 >
-                  {square || '•'}
+                  {getValue(square) || '•'}
                 </Square>
               ))}
             </tr>
@@ -37,6 +49,10 @@ const GameBoard: React.SFC<BoardProps> = props => {
   ) : (
     <h1>NO_BOARD</h1>
   );
+}
+
+GameBoard.defaultProps = {
+  getValue: (square: Square) => square,
 };
 
 export default GameBoard;
