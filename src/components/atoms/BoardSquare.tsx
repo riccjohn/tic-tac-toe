@@ -1,11 +1,11 @@
 import styled, { css } from 'styled-components';
 
 type SquareProps = {
-  winner?: boolean;
+  winner: boolean;
   theme: Theme;
 };
 
-const Square = styled.td`
+const BoardSquare = styled.td`
   width: 4em;
   height: 4em;
   font-size: 2.25em;
@@ -24,9 +24,12 @@ const Square = styled.td`
     props.winner &&
     css`
       background: ${props.theme.secondary};
+      &:hover {
+        background-color: ${props.theme.secondary};
+      }
     `}
 `;
 
-Square.displayName = 'Square';
+BoardSquare.displayName = 'Square';
 
-export default Square;
+export default BoardSquare;

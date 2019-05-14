@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Button from './atoms/Button';
-import Square from './atoms/Square';
+import BoardSquare from './atoms/BoardSquare';
 import Table from './atoms/Table';
 import ContentContainer from './atoms/ContentContainer';
 import Title from './atoms/Title';
@@ -24,7 +24,7 @@ function GameBoard(props: BoardProps) {
           {data.map((row, rowIndex) => (
             <tr key={rowIndex} className='row'>
               {row.map((square, columnIndex) => (
-                <Square
+                <BoardSquare
                   winner={containsCoordinates(winningVector, {
                     col: columnIndex,
                     row: rowIndex,
@@ -36,7 +36,7 @@ function GameBoard(props: BoardProps) {
                   }
                 >
                   {getValue(square) || '•'}
-                </Square>
+                </BoardSquare>
               ))}
             </tr>
           ))}
