@@ -86,7 +86,7 @@ describe('GameBoard component', () => {
   });
 
   it('should add a "winner" prop to cells that are part of a win', () => {
-    const boardArray = createBoard(3, undefined);
+    const boardArray: Board = createBoard(3, undefined);
     const wrapper = shallow(
       <GameBoard
         data={boardArray}
@@ -101,7 +101,7 @@ describe('GameBoard component', () => {
     );
 
     const propsArray = boardArray.map(
-      (el: any, idx: number) =>
+      (el, idx: number) =>
         wrapper
           .find(BoardSquare)
           .at(idx)
