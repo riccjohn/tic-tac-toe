@@ -2,6 +2,8 @@ import * as React from 'react';
 import Game from '../tic-tac-toe';
 import GameBoard from './GameBoard';
 import BoardSizeForm from './BoardSizeForm';
+import Layout from './Layout';
+import Title from './atoms/Title';
 
 class TicTacToe extends React.Component<object, GameState> {
   private game: Game = new Game();
@@ -86,12 +88,10 @@ class TicTacToe extends React.Component<object, GameState> {
   public render() {
     const { board } = this.state;
     return (
-      <div className='container center'>
-        <div className='center-container center column'>
-          <h1>Tic Tac Toe</h1>
-          {this.currentView(board)}
-        </div>
-      </div>
+      <Layout>
+        <Title>Tic Tac Toe</Title>
+        {this.currentView(board)}
+      </Layout>
     );
   }
 }

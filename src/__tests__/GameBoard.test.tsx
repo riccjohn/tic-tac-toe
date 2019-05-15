@@ -1,6 +1,9 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import GameBoard from '../components/GameBoard';
+import Table from '../components/atoms/Table';
+import Button from '../components/atoms/Button';
+import BoardSquare from '../components/atoms/BoardSquare';
 import { createBoard } from '../helperFunctions/boardCreation';
 
 describe('GameBoard component', () => {
@@ -13,7 +16,7 @@ describe('GameBoard component', () => {
         reset={jest.fn()}
       />
     );
-    expect(wrapper.find('table#game-table').exists()).toBe(true);
+    expect(wrapper.find(Table).exists()).toBe(true);
   });
 
   it('should render 25 squares given a 5x5 array', () => {
@@ -78,15 +81,12 @@ describe('GameBoard component', () => {
       />
     );
     expect(mockFn.mock.calls).toHaveLength(0);
-    wrapper
-      .find('button')
-      .at(0)
-      .simulate('click');
+    wrapper.find(Button).simulate('click');
     expect(mockFn.mock.calls).toHaveLength(1);
   });
 
-  it('should add a winner class to cells that are part of a win', () => {
-    const boardArray = createBoard(3, undefined);
+  it('should add a "winner" prop to cells that are part of a win', () => {
+    const boardArray: Board = createBoard(3, undefined);
     const wrapper = shallow(
       <GameBoard
         data={boardArray}
@@ -99,6 +99,15 @@ describe('GameBoard component', () => {
         ]}
       />
     );
-    expect(wrapper.find('.winner')).toHaveLength(3);
+
+    const winnerProps = new Array(3).fill(undefined).map(
+      (el, idx) =>
+        wrapper
+          .find(BoardSquare)
+          .at(idx)
+          .props().winner
+    );
+
+    expect(winnerProps.every(winner => !!winner)).toBeTruthy();
   });
 });

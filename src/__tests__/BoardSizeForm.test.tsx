@@ -25,7 +25,7 @@ describe('BoardSizeForm component', () => {
       <BoardSizeForm onSubmit={jest.fn()} onChange={mockFn} />
     );
     expect(mockFn.mock.calls).toHaveLength(0);
-    wrapper.find("form input[name='size']").simulate('change');
+    wrapper.find("form StyledInput[name='size']").simulate('change');
     expect(mockFn.mock.calls).toHaveLength(1);
   });
 

@@ -1,4 +1,9 @@
 import * as React from 'react';
+import Button from './atoms/Button';
+import BoardSquare from './atoms/BoardSquare';
+import Table from './atoms/Table';
+import ContentContainer from './atoms/ContentContainer';
+import Title from './atoms/Title';
 import { containsCoordinates } from '../helperFunctions/contains';
 
 function GameBoard(props: BoardProps) {
@@ -11,39 +16,38 @@ function GameBoard(props: BoardProps) {
     winner,
   } = props;
 
-  return (
-    <div id='board' className='center column'>
-      {winner && <h1>{`Winner is ${winner}`}</h1>}
-      <table id='game-table'>
+  return data ? (
+    <ContentContainer>
+      {winner && <Title>{`Winner is ${winner}`}</Title>}
+      <Table id='game-table'>
         <tbody>
           {data.map((row, rowIndex) => (
             <tr key={rowIndex} className='row'>
               {row.map((square, columnIndex) => (
-                <td
+                <BoardSquare
+                  winner={containsCoordinates(winningVector, {
+                    col: columnIndex,
+                    row: rowIndex,
+                  })}
                   key={columnIndex}
-                  className={
-                    containsCoordinates(winningVector, {
-                      col: columnIndex,
-                      row: rowIndex,
-                    })
-                      ? 'square winner'
-                      : 'square'
-                  }
+                  className='square'
                   onClick={() =>
                     handlePlayerInput({ row: rowIndex, col: columnIndex })
                   }
                 >
-                  {getValue(square)}
-                </td>
+                  {getValue(square) || '•'}
+                </BoardSquare>
               ))}
             </tr>
           ))}
         </tbody>
-      </table>
-      <button className='reset' onClick={reset}>
+      </Table>
+      <Button className='reset' onClick={reset}>
         Reset
-      </button>
-    </div>
+      </Button>
+    </ContentContainer>
+  ) : (
+    <h1>NO_BOARD</h1>
   );
 }
 
