@@ -100,14 +100,14 @@ describe('GameBoard component', () => {
       />
     );
 
-    const propsArray = boardArray.map(
-      (el, idx: number) =>
+    const winnerProps = new Array(3).fill(undefined).map(
+      (el, idx) =>
         wrapper
           .find(BoardSquare)
           .at(idx)
           .props().winner
     );
 
-    expect(propsArray.every(val => val === true)).toBeTruthy();
+    expect(winnerProps.every(winner => !!winner)).toBeTruthy();
   });
 });
